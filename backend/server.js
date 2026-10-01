@@ -1575,7 +1575,26 @@ function computeDashboard(bills, restaurant = EMPTY_RESTAURANT, options = {}) {
   }
 }
 
+const coldStartSimMap = new Map()
+
 app.get('/api/dashboard', async (request, response) => {
+  // Support testing simulated cold start 503 errors
+  if (request.headers['x-simulate-cold-start']) {
+    const simKey = request.headers['x-test-id'] || 'default'
+    const currentCount = coldStartSimMap.get(simKey) || 0
+    const targetFails = parseInt(request.headers['x-simulate-cold-start'], 10)
+    if (currentCount < targetFails) {
+      coldStartSimMap.set(simKey, currentCount + 1)
+      console.log(`[dashboard] [SIMULATION] Returning simulated cold start 503 (attempt ${currentCount + 1}/${targetFails})`)
+      return response.status(503).json({
+        error: 'Service Unavailable (Server cold start in progress)',
+        isColdStart: true,
+      })
+    }
+    coldStartSimMap.delete(simKey)
+    console.log(`[dashboard] [SIMULATION] Cold start simulation complete, returning live dashboard data`)
+  }
+
   const auth = getAuthUserRestaurant(request)
   const restaurant = auth?.restaurant || EMPTY_RESTAURANT
   const restaurantId = restaurant.id

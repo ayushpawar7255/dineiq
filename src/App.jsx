@@ -65,28 +65,49 @@ function App() {
       return
     }
 
-    fetch('/api/auth/session', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (active) {
-          if (data?.user) {
-            setUser(data.user)
-            if (data.restaurant) setRestaurant(data.restaurant)
-          } else {
-            localStorage.removeItem('dineq:auth-token')
-            localStorage.removeItem('dineq:auth-user')
+    const checkSessionWithRetry = async () => {
+      let attempts = 0
+      const maxAttempts = 3
+      while (attempts < maxAttempts && active) {
+        attempts++
+        try {
+          if (attempts > 1) {
+            await new Promise((resolve) => setTimeout(resolve, 2000))
           }
-          setSessionChecked(true)
+          const res = await fetch('/api/auth/session', {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          if (res.status === 401 || res.status === 403) {
+            // Explicitly unauthorized / invalid token
+            if (active) {
+              localStorage.removeItem('dineq:auth-token')
+              localStorage.removeItem('dineq:auth-user')
+              setSessionChecked(true)
+            }
+            return
+          }
+          if (res.ok) {
+            const data = await res.json().catch(() => null)
+            if (active && data?.user) {
+              setUser(data.user)
+              if (data.restaurant) setRestaurant(data.restaurant)
+            }
+            if (active) setSessionChecked(true)
+            return
+          }
+          // If 503/502/504 (cold start), loop will retry after delay
+          console.warn(`[App] Session check got HTTP ${res.status}, retrying cold start (${attempts}/${maxAttempts})...`)
+        } catch (err) {
+          console.warn(`[App] Session check network glitch (${attempts}/${maxAttempts}):`, err.message)
         }
-      })
-      .catch((err) => {
-        if (active) {
-          console.warn('Session check failed:', err)
-          setSessionChecked(true)
-        }
-      })
+      }
+      if (active) {
+        // If server remained down after all retries, keep token for next refresh
+        setSessionChecked(true)
+      }
+    }
+
+    checkSessionWithRetry()
 
     return () => {
       active = false

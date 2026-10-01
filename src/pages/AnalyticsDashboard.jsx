@@ -41,6 +41,8 @@ export function AnalyticsDashboard({
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [isWakingUp, setIsWakingUp] = useState(false)
+  const [wakingUpAttempt, setWakingUpAttempt] = useState(1)
   const [liveRestaurant, setLiveRestaurant] = useState(restaurant || null)
   const [periodType, setPeriodType] = useState('week') // 'week' | 'month' | 'all'
   const [weekOffset, setWeekOffset] = useState(0)
@@ -193,10 +195,41 @@ export function AnalyticsDashboard({
     }
   }
 
-  const loadData = (pType = periodType, wOffset = weekOffset, sMonth = selectedMonth) => {
+  const fetchJsonWithRetry = async (url, options = {}, maxRetries = 3, retryDelayMs = 2500, onRetry) => {
+    let lastError = null
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        if (attempt > 1) {
+          onRetry?.(attempt)
+          await new Promise((resolve) => setTimeout(resolve, retryDelayMs))
+        }
+        const res = await fetch(url, options)
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}))
+          const isTransient = res.status === 503 || res.status === 502 || res.status === 504 || /503|service unavailable|cold start|high demand|overloaded/i.test(body.error || '')
+          const err = new Error(body.error || `Failed to load dashboard (HTTP ${res.status})`)
+          err.status = res.status
+          err.isTransient = isTransient
+          throw err
+        }
+        return await res.json()
+      } catch (err) {
+        lastError = err
+        const isTransient = err.isTransient || err.status === 503 || err.status === 502 || err.status === 504 || /503|service unavailable|cold start|failed to fetch|network|fetch failed/i.test(err.message)
+        if (!isTransient || attempt >= maxRetries) {
+          throw err
+        }
+        onRetry?.(attempt)
+      }
+    }
+    throw lastError
+  }
+
+  const loadData = async (pType = periodType, wOffset = weekOffset, sMonth = selectedMonth) => {
     if (isDemo) {
       setLoading(true)
       setError('')
+      setIsWakingUp(false)
       const demoData = getDemoDashboardData(wOffset)
       setData(demoData)
       if (demoData?.unreadNotificationsCount != null) {
@@ -220,31 +253,36 @@ export function AnalyticsDashboard({
     }
     const dashUrl = `/api/dashboard?${params.toString()}`
 
-    Promise.all([
-      fetch(dashUrl, { headers }).then(async (res) => {
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({}))
-          throw new Error(body.error || `Failed to load dashboard (HTTP ${res.status})`)
-        }
-        return res.json()
-      }),
-      fetch('/api/restaurant', { headers }).then((res) => (res.ok ? res.json() : null)).catch(() => null),
-    ])
-      .then(([dashData, restData]) => {
-        setData(dashData)
-        if (dashData?.unreadNotificationsCount != null) {
-          setUnreadCount(dashData.unreadNotificationsCount)
-        }
-        if (dashData?.selectedMonth) {
-          setSelectedMonth(dashData.selectedMonth)
-        }
-        if (restData) {
-          setLiveRestaurant(restData)
-          onRestaurantUpdated?.(restData)
-        }
-      })
-      .catch((err) => setError(err.message || 'Could not connect to dashboard service.'))
-      .finally(() => setLoading(false))
+    try {
+      const [dashData, restData] = await Promise.all([
+        fetchJsonWithRetry(dashUrl, { headers }, 3, 2500, (attempt) => {
+          setIsWakingUp(true)
+          setWakingUpAttempt(attempt)
+        }),
+        fetchJsonWithRetry('/api/restaurant', { headers }, 3, 2500).catch(() => null),
+      ])
+
+      setData(dashData)
+      setError('')
+      setIsWakingUp(false)
+
+      if (dashData?.unreadNotificationsCount != null) {
+        setUnreadCount(dashData.unreadNotificationsCount)
+      }
+      if (dashData?.selectedMonth) {
+        setSelectedMonth(dashData.selectedMonth)
+      }
+      if (restData) {
+        setLiveRestaurant(restData)
+        onRestaurantUpdated?.(restData)
+      }
+    } catch (err) {
+      setIsWakingUp(false)
+      console.warn('[AnalyticsDashboard] Dashboard load failed after retries:', err.message)
+      setError(err.message || 'Could not connect to dashboard service.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -464,7 +502,19 @@ export function AnalyticsDashboard({
             />
           )}
 
-          {error && (
+          {isWakingUp && (
+            <div className="panel waking-up-banner" role="status" aria-live="polite">
+              <div className="waking-up-content">
+                <Loader2 size={20} className="spin waking-up-icon" />
+                <div>
+                  <strong>Waking up, this may take a moment...</strong>
+                  <p>Connecting to DineIQ cloud server after inactivity (attempt {wakingUpAttempt}/3). Retrying automatically...</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {error && !isWakingUp && (
             <div className="panel error-banner">
               <div className="error-content">
                 <AlertTriangle size={20} className="error-icon" />
@@ -473,7 +523,7 @@ export function AnalyticsDashboard({
                   <p>{error}</p>
                 </div>
               </div>
-              <button className="secondary-button" onClick={loadData}>
+              <button className="secondary-button" onClick={() => loadData()}>
                 <RefreshCw size={14} /> Retry
               </button>
             </div>
@@ -482,7 +532,7 @@ export function AnalyticsDashboard({
           {loading && !data && (
             <div className="state-banner">
               <Loader2 size={24} className="spin" style={{ marginRight: 10 }} />
-              <span>Loading your dashboard analytics...</span>
+              <span>{isWakingUp ? 'Waking up, this may take a moment...' : 'Loading your dashboard analytics...'}</span>
             </div>
           )}
 

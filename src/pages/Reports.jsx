@@ -665,13 +665,23 @@ export function Reports({ onNavigate, restaurant, user, onSignOut, onRestaurantU
     const headers = token ? { Authorization: `Bearer ${token}` } : {}
     const query = validMonth ? `?month=${encodeURIComponent(validMonth)}` : ''
 
+    const fetchWithRetry = async (url) => {
+      for (let i = 0; i < 3; i++) {
+        try {
+          if (i > 0) await new Promise((r) => setTimeout(r, 2000))
+          const res = await fetch(url, { headers })
+          if (res.ok) return await res.json()
+          if (res.status !== 503 && res.status !== 502) return null
+        } catch {
+          if (i === 2) return null
+        }
+      }
+      return null
+    }
+
     Promise.all([
-      fetch('/api/restaurant', { headers })
-        .then(async (res) => (res.ok ? res.json() : null))
-        .catch(() => null),
-      fetch(`/api/reports/monthly${query}`, { headers })
-        .then(async (res) => (res.ok ? res.json() : null))
-        .catch(() => null),
+      fetchWithRetry('/api/restaurant'),
+      fetchWithRetry(`/api/reports/monthly${query}`),
     ])
       .then(([restData, monthRes]) => {
         if (restData) {
