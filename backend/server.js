@@ -295,6 +295,11 @@ async function withTimeout(promise, ms = 2000) {
   }
 }
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+function isValidUUID(val) {
+  return typeof val === 'string' && UUID_REGEX.test(val)
+}
+
 async function getRestaurantId() {
   if (configuredRestaurantId) return configuredRestaurantId
   if (!isSupabaseAvailable()) return EMPTY_RESTAURANT.id
@@ -1227,7 +1232,7 @@ async function checkAndTriggerNotifications(bills = [], restaurant = EMPTY_RESTA
     }
     await deliverNotification(newNotif, restaurant)
 
-    if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+    if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
       try {
         await withTimeout(
           supabase.from('notifications').insert({
@@ -1654,7 +1659,7 @@ app.get('/api/dashboard', async (request, response) => {
     bills = [...userBills.get(restaurantId)]
   }
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false }).order('time', { ascending: false })
@@ -2045,7 +2050,7 @@ app.get('/api/reports/monthly', async (request, response) => {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
@@ -2171,7 +2176,7 @@ app.get('/api/reports/gst-summary', async (request, response) => {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
@@ -2361,7 +2366,7 @@ app.post('/api/bills', express.json(), async (request, response) => {
   userBills.get(restaurantId).unshift(newBillRecord)
   saveStore()
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data: saved, error } = await withTimeout(supabase.from('bills').insert({
         restaurant_id: restaurantId,
@@ -2791,7 +2796,7 @@ app.post('/api/milestones/acknowledge', express.json(), async (request, response
     saveStore()
   }
 
-  if (isSupabaseAvailable() && restaurant.id && restaurant.id !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurant.id) && restaurant.id !== EMPTY_RESTAURANT.id) {
     try {
       await withTimeout(
         supabase
@@ -2850,7 +2855,7 @@ app.post('/api/notifications/read', express.json(), async (request, response) =>
   }
   saveStore()
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
         await withTimeout(supabase.from('notifications').update({ is_read: true }).eq('restaurant_id', restaurantId))
@@ -2882,7 +2887,7 @@ app.post('/api/notifications/clear', express.json(), async (request, response) =
   }
   saveStore()
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
         await withTimeout(supabase.from('notifications').delete().eq('restaurant_id', restaurantId))
@@ -2950,7 +2955,7 @@ async function getRestaurantBillsWithItems(restaurantId) {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
