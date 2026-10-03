@@ -251,15 +251,46 @@ Rules:
 - Distinguish subtotal from grand total. The grand total is usually labelled total, net payable, or amount due.
 - A line item amount is the final amount for that line, while rate is its per-unit price.`
 
-function withTimeout(promise, ms = 5000) {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) => setTimeout(() => reject(new Error('Supabase request timed out')), ms)),
-  ])
+let supabaseReachable = true
+let lastSupabaseFailure = 0
+const SUPABASE_COOLDOWN_MS = 60 * 1000
+
+function isSupabaseAvailable() {
+  if (!supabase) return false
+  if (!supabaseReachable) {
+    if (Date.now() - lastSupabaseFailure > SUPABASE_COOLDOWN_MS) {
+      return true
+    }
+    return false
+  }
+  return true
+}
+
+function markSupabaseFailure(err) {
+  supabaseReachable = false
+  lastSupabaseFailure = Date.now()
+  console.warn('[supabase] connectivity issue, temporarily pausing supabase calls for 60s:', err?.message || err)
+}
+
+async function withTimeout(promise, ms = 2000) {
+  try {
+    const res = await Promise.race([
+      promise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Supabase request timed out')), ms)),
+    ])
+    if (res && res.error) {
+      markSupabaseFailure(res.error)
+    }
+    return res
+  } catch (err) {
+    markSupabaseFailure(err)
+    throw err
+  }
 }
 
 async function getRestaurantId() {
   if (configuredRestaurantId) return configuredRestaurantId
+  if (!isSupabaseAvailable()) return EMPTY_RESTAURANT.id
   const { data, error } = await withTimeout(supabase.from('restaurants').select('id').limit(1).single())
   if (error) throw error
   return data.id
@@ -1189,7 +1220,7 @@ async function checkAndTriggerNotifications(bills = [], restaurant = EMPTY_RESTA
     }
     await deliverNotification(newNotif, restaurant)
 
-    if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+    if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
       try {
         await withTimeout(
           supabase.from('notifications').insert({
@@ -1577,6 +1608,15 @@ function computeDashboard(bills, restaurant = EMPTY_RESTAURANT, options = {}) {
 
 const coldStartSimMap = new Map()
 
+app.get('/api/health', (req, res) => {
+  res.json({
+    ok: true,
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    supabaseReachable: isSupabaseAvailable(),
+  })
+})
+
 app.get('/api/dashboard', async (request, response) => {
   // Support testing simulated cold start 503 errors
   if (request.headers['x-simulate-cold-start']) {
@@ -1607,7 +1647,7 @@ app.get('/api/dashboard', async (request, response) => {
     bills = [...userBills.get(restaurantId)]
   }
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false }).order('time', { ascending: false })
@@ -1998,7 +2038,7 @@ app.get('/api/reports/monthly', async (request, response) => {
     } catch {}
   }
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
@@ -2124,7 +2164,7 @@ app.get('/api/reports/gst-summary', async (request, response) => {
     } catch {}
   }
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
@@ -2314,7 +2354,7 @@ app.post('/api/bills', express.json(), async (request, response) => {
   userBills.get(restaurantId).unshift(newBillRecord)
   saveStore()
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data: saved, error } = await withTimeout(supabase.from('bills').insert({
         restaurant_id: restaurantId,
@@ -2380,7 +2420,7 @@ app.post('/api/auth/signup', express.json(), async (request, response) => {
   }
 
   let supabaseUserId = null
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const { data, error } = await supabase.auth.signUp({
         email: cleanEmail,
@@ -2439,7 +2479,7 @@ app.post('/api/auth/signin', express.json(), async (request, response) => {
     return response.status(400).json({ error: 'Please provide both email and password.' })
   }
 
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: cleanEmail,
@@ -2492,7 +2532,7 @@ app.post('/api/auth/forgot-password', express.json(), async (request, response) 
   const redirectUrl = redirectTo || `${clientOrigin}/#type=recovery`
 
   let supabaseSent = false
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(cleanEmail, {
         redirectTo: redirectUrl,
@@ -2532,7 +2572,7 @@ app.post('/api/auth/verify-reset-token', express.json(), async (request, respons
     return response.status(400).json({ error: 'Reset token is required.' })
   }
 
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const { data: { user }, error } = await supabase.auth.getUser(token)
       if (!error && user) {
@@ -2569,7 +2609,7 @@ app.post('/api/auth/update-password', express.json(), async (request, response) 
   let matchedUser = null
 
   // 1. If Supabase token, verify with Supabase
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const { data: { user }, error } = await supabase.auth.getUser(token)
       if (!error && user) {
@@ -2665,7 +2705,7 @@ app.post('/api/auth/signout', async (request, response) => {
   if (token) {
     authSessions.delete(token)
   }
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       await supabase.auth.signOut().catch(() => {})
     } catch {}
@@ -2679,7 +2719,7 @@ app.get('/api/restaurant', async (request, response) => {
     return response.json(auth.restaurant)
   }
 
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const id = await getRestaurantId()
       const { data, error } = await withTimeout(supabase.from('restaurants').select('*').eq('id', id).single())
@@ -2701,7 +2741,7 @@ app.patch('/api/restaurant', express.json(), async (request, response) => {
   Object.assign(targetRestaurant, request.body)
   saveStore()
 
-  if (supabase) {
+  if (isSupabaseAvailable()) {
     try {
       const id = await getRestaurantId()
       const supabasePayload = {}
@@ -2744,7 +2784,7 @@ app.post('/api/milestones/acknowledge', express.json(), async (request, response
     saveStore()
   }
 
-  if (supabase && restaurant.id && restaurant.id !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurant.id && restaurant.id !== EMPTY_RESTAURANT.id) {
     try {
       await withTimeout(
         supabase
@@ -2803,7 +2843,7 @@ app.post('/api/notifications/read', express.json(), async (request, response) =>
   }
   saveStore()
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
         await withTimeout(supabase.from('notifications').update({ is_read: true }).eq('restaurant_id', restaurantId))
@@ -2835,7 +2875,7 @@ app.post('/api/notifications/clear', express.json(), async (request, response) =
   }
   saveStore()
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
         await withTimeout(supabase.from('notifications').delete().eq('restaurant_id', restaurantId))
@@ -2903,7 +2943,7 @@ async function getRestaurantBillsWithItems(restaurantId) {
     } catch {}
   }
 
-  if (supabase && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restaurantId && restaurantId !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
         supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })

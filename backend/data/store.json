@@ -1,0 +1,3894 @@
+{
+  "users": {
+    "mrsandwhich_test@example.com": {
+      "id": "usr_1790438016491_ngvkt7",
+      "email": "mrsandwhich_test@example.com",
+      "passwordHash": "544b31525225073962ba334d56fb09c9c72b7c2662048d3ddfc8ec749e57ee4c",
+      "created_at": "2026-09-26T15:53:36.492Z"
+    },
+    "ayushpawar3f@gmail.com": {
+      "id": "usr_1790438016491_ngvkt7",
+      "email": "ayushpawar3f@gmail.com",
+      "passwordHash": "49b98a5134515b182efb87f299746ae9a7f0a26d5bf26d01229f46ba0d84f813",
+      "updated_at": "2026-09-26T16:11:38.458Z",
+      "resetToken": "ae018c38ed40f08387a2415421e7130ef6dc59a49cb47a26908b034f45f4c4a4",
+      "resetExpiresAt": 1790440161550
+    },
+    "ayushpawar2f@gmail.com": {
+      "id": "usr_1790439421092_g10bub",
+      "email": "ayushpawar2f@gmail.com",
+      "passwordHash": "856e44a640b48232018771b3f09ff42d12a1c09e50c43c02c53e51054d994f51",
+      "created_at": "2026-09-26T16:17:01.092Z"
+    },
+    "qa_1790756779198@spicesymphony.in": {
+      "id": "usr_1790756780128_b5cefu",
+      "email": "qa_1790756779198@spicesymphony.in",
+      "passwordHash": "a109e36947ad56de1dca1cc49f0ef8ac9ad9a7b1aa0df41fb3c4cb73c1ff01ea",
+      "created_at": "2026-09-30T08:26:20.128Z"
+    },
+    "fix1_1790757432952@test.com": {
+      "id": "usr_1790757434556_qkdw8c",
+      "email": "fix1_1790757432952@test.com",
+      "passwordHash": "a109e36947ad56de1dca1cc49f0ef8ac9ad9a7b1aa0df41fb3c4cb73c1ff01ea",
+      "created_at": "2026-09-30T08:37:14.556Z"
+    },
+    "qa_owner_1790844814280@testdine.in": {
+      "id": "usr_1790844816217_05cl40",
+      "email": "qa_owner_1790844814280@testdine.in",
+      "passwordHash": "ff7bd97b1a7789ddd2775122fd6817f3173672da9f802ceec57f284325bf589f",
+      "created_at": "2026-10-01T08:53:36.217Z"
+    }
+  },
+  "sessions": {
+    "dqt_236bc06c45c3c86877bc65bada61f7aaacc1968bdff6c936": {
+      "token": "dqt_236bc06c45c3c86877bc65bada61f7aaacc1968bdff6c936",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "mrsandwhich_test@example.com"
+      },
+      "expiresAt": 1793030016492
+    },
+    "dqt_7ec2992c1a64fbefda90a11ef7f6190d6b50d28e0a965b4b": {
+      "token": "dqt_7ec2992c1a64fbefda90a11ef7f6190d6b50d28e0a965b4b",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "mrsandwhich_test@example.com"
+      },
+      "expiresAt": 1793030016564
+    },
+    "dqt_34353f76fe34907b6040ff0d49c40d71bee008cfa5ccc65d": {
+      "token": "dqt_34353f76fe34907b6040ff0d49c40d71bee008cfa5ccc65d",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "mrsandwhich_test@example.com"
+      },
+      "expiresAt": 1793030016587
+    },
+    "dqt_712885458752238c1d3f31f703ef7bb0c1379967c29104e9": {
+      "token": "dqt_712885458752238c1d3f31f703ef7bb0c1379967c29104e9",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "mrsandwhich_test@example.com"
+      },
+      "expiresAt": 1793030045543
+    },
+    "dqt_7e48a4d65c90db4f931119adcef9031809898f5ad375a138": {
+      "token": "dqt_7e48a4d65c90db4f931119adcef9031809898f5ad375a138",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793031138798
+    },
+    "dqt_92514963dcfe9f461700b37e538ee9517d6a0261cb0cde38": {
+      "token": "dqt_92514963dcfe9f461700b37e538ee9517d6a0261cb0cde38",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793031171334
+    },
+    "dqt_3fba329a0c614237244b731ce876214d45051ee1d27c917b": {
+      "token": "dqt_3fba329a0c614237244b731ce876214d45051ee1d27c917b",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793031235634
+    },
+    "dqt_d7d73703d4afa2ed57d4470e1e88ab76d30c0e2c3ad48821": {
+      "token": "dqt_d7d73703d4afa2ed57d4470e1e88ab76d30c0e2c3ad48821",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032298211
+    },
+    "dqt_a5e0b6a0ad58e8fdc5f49f586f44920b08db2911241f8255": {
+      "token": "dqt_a5e0b6a0ad58e8fdc5f49f586f44920b08db2911241f8255",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032309155
+    },
+    "dqt_cdd165582e3177a4ef56a4261ef1cfefc9d1dc9bd3826805": {
+      "token": "dqt_cdd165582e3177a4ef56a4261ef1cfefc9d1dc9bd3826805",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032393853
+    },
+    "dqt_dc203ded0e53312af15d2488fc17f68c53b1ef29f9e4e8c9": {
+      "token": "dqt_dc203ded0e53312af15d2488fc17f68c53b1ef29f9e4e8c9",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032451427
+    },
+    "dqt_c316e382b07a02149c5adb9bf053d9b95581e315a6e6204f": {
+      "token": "dqt_c316e382b07a02149c5adb9bf053d9b95581e315a6e6204f",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032490328
+    },
+    "dqt_1733412346d30e0392350d4280e5bccaa58e56a5cc1e0096": {
+      "token": "dqt_1733412346d30e0392350d4280e5bccaa58e56a5cc1e0096",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032534258
+    },
+    "dqt_54e3dfcbab2e3be0b7d9f3019dc7f739015e881b2a34d17d": {
+      "token": "dqt_54e3dfcbab2e3be0b7d9f3019dc7f739015e881b2a34d17d",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032760428
+    },
+    "dqt_545c1942610401e62f45816feb0d3efd8d8c75deb3b769fc": {
+      "token": "dqt_545c1942610401e62f45816feb0d3efd8d8c75deb3b769fc",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793032991838
+    },
+    "dqt_023dbcf97f7dee712613fde4e40b5eaff5bd71a681127e09": {
+      "token": "dqt_023dbcf97f7dee712613fde4e40b5eaff5bd71a681127e09",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793033004954
+    },
+    "dqt_6db4841cde4d8d817be6d3f7279b47b9236871e8eda328b7": {
+      "token": "dqt_6db4841cde4d8d817be6d3f7279b47b9236871e8eda328b7",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793033014410
+    },
+    "dqt_fd81bd93ca2624f41a55f25bba2506f4b425b73f5a2f949c": {
+      "token": "dqt_fd81bd93ca2624f41a55f25bba2506f4b425b73f5a2f949c",
+      "user": {
+        "id": "usr_1790438016491_ngvkt7",
+        "email": "ayushpawar3f@gmail.com"
+      },
+      "expiresAt": 1793033122186
+    },
+    "dqt_dd9a64b41d608469e6258758e8970ca23c112efe38b96241": {
+      "token": "dqt_dd9a64b41d608469e6258758e8970ca23c112efe38b96241",
+      "user": {
+        "id": "usr_1790756780128_b5cefu",
+        "email": "qa_1790756779198@spicesymphony.in"
+      },
+      "expiresAt": 1793348810884
+    },
+    "dqt_e7c65fdc610828d8053140c1ee512da63e7f04c9ae7f5249": {
+      "token": "dqt_e7c65fdc610828d8053140c1ee512da63e7f04c9ae7f5249",
+      "user": {
+        "id": "usr_1790757434556_qkdw8c",
+        "email": "fix1_1790757432952@test.com"
+      },
+      "expiresAt": 1793349434556
+    },
+    "dqt_4810d062ea5482185e2b40a9c2c36b44959ac357a4f3173c": {
+      "token": "dqt_4810d062ea5482185e2b40a9c2c36b44959ac357a4f3173c",
+      "user": {
+        "id": "usr_1790439421092_g10bub",
+        "email": "ayushpawar2f@gmail.com"
+      },
+      "expiresAt": 1793420243254
+    },
+    "dqt_8e5a8986c1633b680c12f72021c6b45be595e7fdcc065ac3": {
+      "token": "dqt_8e5a8986c1633b680c12f72021c6b45be595e7fdcc065ac3",
+      "user": {
+        "id": "usr_1790844816217_05cl40",
+        "email": "qa_owner_1790844814280@testdine.in"
+      },
+      "expiresAt": 1793436816218
+    },
+    "dqt_0010863aae27915a450ec682bec53900ca9f9fffa7a242a8": {
+      "token": "dqt_0010863aae27915a450ec682bec53900ca9f9fffa7a242a8",
+      "user": {
+        "id": "usr_1790844816217_05cl40",
+        "email": "qa_owner_1790844814280@testdine.in"
+      },
+      "expiresAt": 1793436822101
+    },
+    "dqt_2ecef797d6b0f4f2c605cde970c081060edcb64dc1806c95": {
+      "token": "dqt_2ecef797d6b0f4f2c605cde970c081060edcb64dc1806c95",
+      "user": {
+        "id": "usr_1790439421092_g10bub",
+        "email": "ayushpawar2f@gmail.com"
+      },
+      "expiresAt": 1793454108145
+    },
+    "dqt_f5978229e4e70f6774a6b63668cea70e8723d685d6d9c95c": {
+      "token": "dqt_f5978229e4e70f6774a6b63668cea70e8723d685d6d9c95c",
+      "user": {
+        "id": "usr_1790439421092_g10bub",
+        "email": "ayushpawar2f@gmail.com"
+      },
+      "expiresAt": 1793460953063
+    }
+  },
+  "restaurants": {
+    "usr_1790438016491_ngvkt7": {
+      "id": "rest_usr_1790438016491_ngvkt7",
+      "name": "Mr. Sandwhich",
+      "owner_name": "Ayush Pawar",
+      "address": "100 Feet Rd, Indiranagar, Bengaluru",
+      "phone": "+91 9876543210",
+      "email": "ayushpawar3f@gmail.com",
+      "gstin": "29ABCDE1234F1Z5",
+      "opening_time": "",
+      "closing_time": "",
+      "default_tax_rate": 0,
+      "weekly_target": 0,
+      "preferred_report_day": "",
+      "currency": "INR",
+      "fixed_expenses": [
+        {
+          "key": "rent",
+          "label": "rent",
+          "value": 45000
+        }
+      ],
+      "staff_expenses": [
+        {
+          "key": "chef_salaries",
+          "label": "chef salaries",
+          "value": 30000
+        }
+      ],
+      "variable_expenses": [],
+      "user_id": "usr_1790438016491_ngvkt7",
+      "acknowledged_milestones": [],
+      "fssai_license_number": "11521012345678",
+      "fssai_expiry_date": "2026-10-19",
+      "other_licenses": [
+        {
+          "id": "lic_fire",
+          "name": "Fire Safety NOC",
+          "license_number": "NOC-2024-51",
+          "expiry_date": "2026-11-15"
+        }
+      ],
+      "last_notified": {
+        "best_day_ever": {
+          "dedup_key": "best_day_ever_2026-10-01",
+          "title": "🏆 New Best-Day-Ever Record!",
+          "triggered_at": "2026-10-01T08:50:53.447Z"
+        },
+        "weekly_average": {
+          "dedup_key": "weekly_avg_crossed_2026-10-01",
+          "title": "📈 Trailing 7-Day Average Beaten by 1411%!",
+          "triggered_at": "2026-10-01T08:50:56.260Z"
+        },
+        "license_expiring": {
+          "dedup_key": "license_warning_60d_Fire Safety NOC_2026-11-15",
+          "title": "⚠️ Fire Safety NOC expires in 50 days — renew soon",
+          "triggered_at": "2026-09-26T17:54:54.190Z"
+        },
+        "daily_summary": {
+          "dedup_key": "daily_summary_2026-09-26",
+          "title": "🌙 Daily Pulse: ₹5,012",
+          "triggered_at": "2026-09-26T18:11:38.508Z"
+        },
+        "milestone": {
+          "dedup_key": "milestone_notif_bills_alltime_50",
+          "title": "🎉 Milestone reached: 50 bills captured!",
+          "triggered_at": "2026-10-01T08:50:56.275Z"
+        }
+      },
+      "fixed_expense_total": 45000,
+      "staff_expense_total": 30000
+    },
+    "usr_1790439421092_g10bub": {
+      "id": "rest_usr_1790439421092_g10bub",
+      "name": "Mr. Sandwhich",
+      "owner_name": "Ayush Pawar",
+      "address": "Thane",
+      "phone": "7039837075",
+      "email": "ayushpawar2f@gmail.com",
+      "gstin": "",
+      "opening_time": "",
+      "closing_time": "",
+      "default_tax_rate": 0,
+      "weekly_target": 0,
+      "preferred_report_day": "Monday",
+      "currency": "INR",
+      "fixed_expenses": [
+        {
+          "key": "rent",
+          "label": "rent",
+          "value": 1000
+        },
+        {
+          "key": "electricity",
+          "label": "electricity",
+          "value": 500
+        },
+        {
+          "key": "water_gas",
+          "label": "water & gas",
+          "value": 0
+        },
+        {
+          "key": "internet_phone",
+          "label": "internet & phone",
+          "value": 0
+        },
+        {
+          "key": "licenses_permits",
+          "label": "licenses & permits",
+          "value": 0
+        },
+        {
+          "key": "maintenance",
+          "label": "maintenance",
+          "value": 0
+        }
+      ],
+      "staff_expenses": [
+        {
+          "key": "chef_salaries",
+          "label": "chef salaries",
+          "value": 500
+        },
+        {
+          "key": "staff_salaries",
+          "label": "staff salaries",
+          "value": 400
+        },
+        {
+          "key": "manager_salary",
+          "label": "manager salary",
+          "value": 0
+        },
+        {
+          "key": "cleaning",
+          "label": "cleaning",
+          "value": 200
+        },
+        {
+          "key": "staff_benefits",
+          "label": "staff benefits",
+          "value": 0
+        },
+        {
+          "key": "delivery",
+          "label": "delivery",
+          "value": 0
+        }
+      ],
+      "variable_expenses": [
+        {
+          "key": "raw_material",
+          "label": "raw material",
+          "value": 1000
+        },
+        {
+          "key": "packaging_supplies",
+          "label": "packaging & supplies",
+          "value": 0
+        },
+        {
+          "key": "marketing_ads",
+          "label": "marketing & ads",
+          "value": 0
+        },
+        {
+          "key": "payment_gateways",
+          "label": "payment gateways",
+          "value": 0
+        },
+        {
+          "key": "others",
+          "label": "others",
+          "value": 0
+        },
+        {
+          "key": "miscellaneous",
+          "label": "miscellaneous",
+          "value": 0
+        }
+      ],
+      "user_id": "usr_1790439421092_g10bub",
+      "acknowledged_milestones": [
+        "best_day_ever_2026-09-26",
+        "best_day_ever_2026-09-30",
+        "best_day_ever_2026-10-01"
+      ],
+      "last_notified": {
+        "best_day_ever": {
+          "dedup_key": "best_day_ever_2026-10-01",
+          "title": "🏆 New Best-Day-Ever Record!",
+          "triggered_at": "2026-10-01T13:53:06.057Z"
+        },
+        "weekly_average": {
+          "dedup_key": "weekly_avg_crossed_2026-10-01",
+          "title": "📈 Trailing 7-Day Average Beaten by 99%!",
+          "triggered_at": "2026-10-01T04:13:30.867Z"
+        },
+        "daily_summary": {
+          "dedup_key": "daily_summary_2026-10-01",
+          "title": "🌙 Daily Pulse: ₹4,893",
+          "triggered_at": "2026-10-01T17:42:08.740Z"
+        }
+      },
+      "fixed_expense_total": 1500,
+      "staff_expense_total": 1100,
+      "variable_expense_total": 1000
+    },
+    "usr_1790756780128_b5cefu": {
+      "id": "rest_usr_1790756780128_b5cefu",
+      "name": "Spice Symphony Kitchen & Bar, Indiranagar",
+      "owner_name": "Vikram Mehra",
+      "address": "100ft Road, Indiranagar, Bengaluru, Karnataka 560038",
+      "phone": "+91 98765 43210",
+      "email": "qa_1790756779198@spicesymphony.in",
+      "gstin": "29AABCU9603R1ZM",
+      "opening_time": "",
+      "closing_time": "",
+      "default_tax_rate": 5,
+      "weekly_target": 250000,
+      "preferred_report_day": "",
+      "currency": "INR",
+      "fixed_expenses": [
+        {
+          "key": "rent",
+          "label": "rent",
+          "value": 45000
+        },
+        {
+          "key": "electricity",
+          "label": "electricity",
+          "value": 12000
+        }
+      ],
+      "staff_expenses": [
+        {
+          "key": "chef_salaries",
+          "label": "chef salaries",
+          "value": 35000
+        }
+      ],
+      "variable_expenses": [
+        {
+          "key": "raw_material",
+          "label": "raw material",
+          "value": 20000
+        }
+      ],
+      "acknowledged_milestones": [],
+      "fssai_license_number": "11223344556677",
+      "fssai_expiry_date": "2026-10-15",
+      "other_licenses": [
+        {
+          "id": "lic_1",
+          "name": "Health Trade License",
+          "license_number": "HTL-BLR-8891",
+          "expiry_date": "2026-11-01"
+        }
+      ],
+      "last_notified": {
+        "license_expiring": {
+          "dedup_key": "license_warning_60d_Health Trade License_2026-11-01",
+          "title": "⚠️ Health Trade License expires in 32 days — renew soon",
+          "triggered_at": "2026-09-30T08:26:35.261Z"
+        },
+        "best_day_ever": {
+          "dedup_key": "best_day_ever_2026-09-30",
+          "title": "🏆 New Best-Day-Ever Record!",
+          "triggered_at": "2026-09-30T08:37:15.333Z"
+        }
+      },
+      "user_id": "usr_1790756780128_b5cefu",
+      "fixed_expense_total": 57000,
+      "staff_expense_total": 35000,
+      "variable_expense_total": 20000
+    },
+    "usr_1790757434556_qkdw8c": {
+      "id": "rest_usr_1790757434556_qkdw8c",
+      "name": "Test Bistro",
+      "owner_name": "Chef Ramesh",
+      "address": "",
+      "phone": "",
+      "email": "fix1_1790757432952@test.com",
+      "gstin": "",
+      "opening_time": "",
+      "closing_time": "",
+      "default_tax_rate": 0,
+      "weekly_target": 0,
+      "preferred_report_day": "",
+      "currency": "INR",
+      "fixed_expenses": [],
+      "staff_expenses": [],
+      "variable_expenses": [],
+      "acknowledged_milestones": [],
+      "fssai_license_number": "",
+      "fssai_expiry_date": "",
+      "other_licenses": [],
+      "last_notified": {
+        "license_expiring": {
+          "dedup_key": "license_warning_60d_Health Trade License_2026-11-01",
+          "title": "⚠️ Health Trade License expires in 32 days — renew soon",
+          "triggered_at": "2026-09-30T08:26:35.261Z"
+        },
+        "best_day_ever": {
+          "dedup_key": "best_day_ever_2026-09-30",
+          "title": "🏆 New Best-Day-Ever Record!",
+          "triggered_at": "2026-09-30T08:37:15.333Z"
+        }
+      },
+      "user_id": "usr_1790757434556_qkdw8c"
+    },
+    "usr_1790844816217_05cl40": {
+      "id": "rest_usr_1790844816217_05cl40",
+      "name": "QA Bistro 4280",
+      "owner_name": "QA Owner",
+      "address": "100 Feet Rd, Indiranagar, Bengaluru",
+      "phone": "+91 9876543210",
+      "email": "qa_owner_1790844814280@testdine.in",
+      "gstin": "29ABCDE1234F1Z5",
+      "opening_time": "",
+      "closing_time": "",
+      "default_tax_rate": 0,
+      "weekly_target": 0,
+      "preferred_report_day": "",
+      "currency": "INR",
+      "fixed_expenses": [
+        {
+          "key": "rent",
+          "label": "rent",
+          "value": 45000
+        }
+      ],
+      "staff_expenses": [
+        {
+          "key": "chef_salaries",
+          "label": "chef salaries",
+          "value": 30000
+        }
+      ],
+      "variable_expenses": [],
+      "acknowledged_milestones": [],
+      "fssai_license_number": "",
+      "fssai_expiry_date": "",
+      "other_licenses": [],
+      "last_notified": {
+        "weekly_average": {
+          "dedup_key": "weekly_avg_crossed_2026-10-01",
+          "title": "📈 Trailing 7-Day Average Beaten by 250%!",
+          "triggered_at": "2026-10-01T08:53:47.172Z"
+        },
+        "best_day_ever": {
+          "dedup_key": "best_day_ever_2026-10-01",
+          "title": "🏆 New Best-Day-Ever Record!",
+          "triggered_at": "2026-10-01T08:54:34.126Z"
+        },
+        "milestone": {
+          "dedup_key": "milestone_notif_bills_alltime_10",
+          "title": "🎉 Milestone reached: 10 bills captured!",
+          "triggered_at": "2026-10-01T08:54:34.426Z"
+        }
+      },
+      "user_id": "usr_1790844816217_05cl40",
+      "fixed_expense_total": 45000,
+      "staff_expense_total": 30000
+    }
+  },
+  "bills": {
+    "rest_usr_1790438016491_ngvkt7": [
+      {
+        "id": "bill-1790844646403",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-35-6119",
+        "date": "2026-10-01",
+        "time": "12:35",
+        "table_no": null,
+        "subtotal": 850,
+        "gst": 60,
+        "total": 910,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646403-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 850,
+            "amount": 850
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646397",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-34-6119",
+        "date": "2026-10-01",
+        "time": "12:34",
+        "table_no": null,
+        "subtotal": 840,
+        "gst": 59,
+        "total": 899,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646397-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 840,
+            "amount": 840
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646392",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-33-6119",
+        "date": "2026-10-01",
+        "time": "12:33",
+        "table_no": null,
+        "subtotal": 830,
+        "gst": 58,
+        "total": 888,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646392-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 830,
+            "amount": 830
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646385",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-32-6119",
+        "date": "2026-10-01",
+        "time": "12:32",
+        "table_no": null,
+        "subtotal": 820,
+        "gst": 57,
+        "total": 877,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646385-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 820,
+            "amount": 820
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646379",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-31-6119",
+        "date": "2026-10-01",
+        "time": "12:31",
+        "table_no": null,
+        "subtotal": 810,
+        "gst": 56,
+        "total": 866,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646379-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 810,
+            "amount": 810
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646372",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-30-6119",
+        "date": "2026-10-01",
+        "time": "12:30",
+        "table_no": null,
+        "subtotal": 800,
+        "gst": 55,
+        "total": 855,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646372-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 800,
+            "amount": 800
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646367",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-29-6119",
+        "date": "2026-10-01",
+        "time": "12:29",
+        "table_no": null,
+        "subtotal": 790,
+        "gst": 54,
+        "total": 844,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646367-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 790,
+            "amount": 790
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646361",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-28-6119",
+        "date": "2026-10-01",
+        "time": "12:28",
+        "table_no": null,
+        "subtotal": 780,
+        "gst": 53,
+        "total": 833,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646361-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 780,
+            "amount": 780
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646355",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-27-6119",
+        "date": "2026-10-01",
+        "time": "12:27",
+        "table_no": null,
+        "subtotal": 770,
+        "gst": 52,
+        "total": 822,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646355-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 770,
+            "amount": 770
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646349",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-26-6119",
+        "date": "2026-10-01",
+        "time": "12:26",
+        "table_no": null,
+        "subtotal": 760,
+        "gst": 51,
+        "total": 811,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646349-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 760,
+            "amount": 760
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646343",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-25-6118",
+        "date": "2026-10-01",
+        "time": "12:25",
+        "table_no": null,
+        "subtotal": 750,
+        "gst": 50,
+        "total": 800,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646343-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 750,
+            "amount": 750
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646337",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-24-6118",
+        "date": "2026-10-01",
+        "time": "12:24",
+        "table_no": null,
+        "subtotal": 740,
+        "gst": 49,
+        "total": 789,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646337-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 740,
+            "amount": 740
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646332",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-23-6118",
+        "date": "2026-10-01",
+        "time": "12:23",
+        "table_no": null,
+        "subtotal": 730,
+        "gst": 48,
+        "total": 778,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646331-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 730,
+            "amount": 730
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646325",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-22-6118",
+        "date": "2026-10-01",
+        "time": "12:22",
+        "table_no": null,
+        "subtotal": 720,
+        "gst": 47,
+        "total": 767,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646325-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 720,
+            "amount": 720
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646314",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-21-6118",
+        "date": "2026-10-01",
+        "time": "12:21",
+        "table_no": null,
+        "subtotal": 710,
+        "gst": 46,
+        "total": 756,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646314-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 710,
+            "amount": 710
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646309",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-20-6118",
+        "date": "2026-10-01",
+        "time": "12:20",
+        "table_no": null,
+        "subtotal": 700,
+        "gst": 45,
+        "total": 745,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646309-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 700,
+            "amount": 700
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646303",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-19-6118",
+        "date": "2026-10-01",
+        "time": "12:19",
+        "table_no": null,
+        "subtotal": 690,
+        "gst": 44,
+        "total": 734,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646303-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 690,
+            "amount": 690
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646297",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-18-6118",
+        "date": "2026-10-01",
+        "time": "12:18",
+        "table_no": null,
+        "subtotal": 680,
+        "gst": 43,
+        "total": 723,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646297-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 680,
+            "amount": 680
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646291",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-17-6117",
+        "date": "2026-10-01",
+        "time": "12:17",
+        "table_no": null,
+        "subtotal": 670,
+        "gst": 42,
+        "total": 712,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646291-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 670,
+            "amount": 670
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646285",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-16-6117",
+        "date": "2026-10-01",
+        "time": "12:16",
+        "table_no": null,
+        "subtotal": 660,
+        "gst": 41,
+        "total": 701,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646285-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 660,
+            "amount": 660
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646280",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-15-6116",
+        "date": "2026-10-01",
+        "time": "12:15",
+        "table_no": null,
+        "subtotal": 650,
+        "gst": 40,
+        "total": 690,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646280-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 650,
+            "amount": 650
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646274",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-14-6116",
+        "date": "2026-10-01",
+        "time": "12:14",
+        "table_no": null,
+        "subtotal": 640,
+        "gst": 39,
+        "total": 679,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646274-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 640,
+            "amount": 640
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646268",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-13-6116",
+        "date": "2026-10-01",
+        "time": "12:13",
+        "table_no": null,
+        "subtotal": 630,
+        "gst": 38,
+        "total": 668,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646268-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 630,
+            "amount": 630
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646262",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-12-6116",
+        "date": "2026-10-01",
+        "time": "12:12",
+        "table_no": null,
+        "subtotal": 620,
+        "gst": 37,
+        "total": 657,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646262-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 620,
+            "amount": 620
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646255",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-11-6116",
+        "date": "2026-10-01",
+        "time": "12:11",
+        "table_no": null,
+        "subtotal": 610,
+        "gst": 36,
+        "total": 646,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646255-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 610,
+            "amount": 610
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646248",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-10-6116",
+        "date": "2026-10-01",
+        "time": "12:10",
+        "table_no": null,
+        "subtotal": 600,
+        "gst": 35,
+        "total": 635,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646248-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 600,
+            "amount": 600
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646241",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-9-6116",
+        "date": "2026-10-01",
+        "time": "12:09",
+        "table_no": null,
+        "subtotal": 590,
+        "gst": 34,
+        "total": 624,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646241-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 590,
+            "amount": 590
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646234",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-8-6116",
+        "date": "2026-10-01",
+        "time": "12:08",
+        "table_no": null,
+        "subtotal": 580,
+        "gst": 33,
+        "total": 613,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646234-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 580,
+            "amount": 580
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646229",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-7-6116",
+        "date": "2026-10-01",
+        "time": "12:07",
+        "table_no": null,
+        "subtotal": 570,
+        "gst": 32,
+        "total": 602,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646228-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 570,
+            "amount": 570
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646222",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-6-6116",
+        "date": "2026-10-01",
+        "time": "12:06",
+        "table_no": null,
+        "subtotal": 560,
+        "gst": 31,
+        "total": 591,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646222-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 560,
+            "amount": 560
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646216",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-5-6116",
+        "date": "2026-10-01",
+        "time": "12:05",
+        "table_no": null,
+        "subtotal": 550,
+        "gst": 30,
+        "total": 580,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646216-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 550,
+            "amount": 550
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646209",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-4-6116",
+        "date": "2026-10-01",
+        "time": "12:04",
+        "table_no": null,
+        "subtotal": 540,
+        "gst": 29,
+        "total": 569,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646209-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 540,
+            "amount": 540
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646202",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-3-6116",
+        "date": "2026-10-01",
+        "time": "12:03",
+        "table_no": null,
+        "subtotal": 530,
+        "gst": 28,
+        "total": 558,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646202-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 530,
+            "amount": 530
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646193",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-2-6115",
+        "date": "2026-10-01",
+        "time": "12:02",
+        "table_no": null,
+        "subtotal": 520,
+        "gst": 27,
+        "total": 547,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646193-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 520,
+            "amount": 520
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844646162",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BULK-1-6115",
+        "date": "2026-10-01",
+        "time": "12:01",
+        "table_no": null,
+        "subtotal": 510,
+        "gst": 26,
+        "total": 536,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844646162-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 510,
+            "amount": 510
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844605794",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "SEP-BILL-5792",
+        "date": "2026-09-28",
+        "time": "20:15",
+        "table_no": null,
+        "subtotal": 2400,
+        "gst": 120,
+        "total": 2520,
+        "payment_mode": "Card",
+        "bill_items": [
+          {
+            "id": "bi-1790844605794-0",
+            "item_name": "Biryani Special",
+            "quantity": 2,
+            "rate": 800,
+            "amount": 1600
+          },
+          {
+            "id": "bi-1790844605794-1",
+            "item_name": "Gulab Jamun",
+            "quantity": 4,
+            "rate": 200,
+            "amount": 800
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844601508",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "QA-BILL-1504",
+        "date": "2026-10-01",
+        "time": "13:45",
+        "table_no": null,
+        "subtotal": 1200,
+        "gst": 60,
+        "total": 1260,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844601507-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 2,
+            "rate": 300,
+            "amount": 600
+          },
+          {
+            "id": "bi-1790844601507-1",
+            "item_name": "Garlic Naan",
+            "quantity": 4,
+            "rate": 100,
+            "amount": 400
+          },
+          {
+            "id": "bi-1790844601507-2",
+            "item_name": "Sweet Lassi",
+            "quantity": 2,
+            "rate": 100,
+            "amount": 200
+          }
+        ]
+      },
+      {
+        "id": "bill-1790787676473",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-VALID-1790787676470",
+        "date": "2026-09-30",
+        "time": "22:31",
+        "table_no": null,
+        "subtotal": 238.1,
+        "gst": 11.9,
+        "total": 250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790787676473-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 238.1,
+            "amount": 238.1
+          }
+        ]
+      },
+      {
+        "id": "bill-1790784255251",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-VALID-1790784255249",
+        "date": "2026-09-30",
+        "time": "21:34",
+        "table_no": null,
+        "subtotal": 238.1,
+        "gst": 11.9,
+        "total": 250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790784255251-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 238.1,
+            "amount": 238.1
+          }
+        ]
+      },
+      {
+        "id": "bill-1790759349411",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-VALID-1790759349408",
+        "date": "2026-09-30",
+        "time": "14:39",
+        "table_no": null,
+        "subtotal": 238.1,
+        "gst": 11.9,
+        "total": 250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790759349411-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 238.1,
+            "amount": 238.1
+          }
+        ]
+      },
+      {
+        "id": "bill-1790759338943",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-VALID-1790759338940",
+        "date": "2026-09-30",
+        "time": "14:38",
+        "table_no": null,
+        "subtotal": 238.1,
+        "gst": 11.9,
+        "total": 250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790759338943-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 238.1,
+            "amount": 238.1
+          }
+        ]
+      },
+      {
+        "id": "bill-1790759260464",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-VALID-1790759260460",
+        "date": "2026-09-30",
+        "time": "14:37",
+        "table_no": null,
+        "subtotal": 238.1,
+        "gst": 11.9,
+        "total": 250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790759260464-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 238.1,
+            "amount": 238.1
+          }
+        ]
+      },
+      {
+        "id": "bill-1790757639215",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "DUP-39174",
+        "date": "2026-09-30",
+        "time": "14:30",
+        "table_no": null,
+        "subtotal": 809.52,
+        "gst": 40.48,
+        "total": 850,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790757639215-0",
+            "item_name": "Duplicate Test Item",
+            "quantity": 2,
+            "rate": 850,
+            "amount": 850
+          }
+        ]
+      },
+      {
+        "id": "bill-1790757628372",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "DUP-28294",
+        "date": "2026-09-30",
+        "time": "14:30",
+        "table_no": null,
+        "subtotal": 809.52,
+        "gst": 40.48,
+        "total": 850,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790757628372-0",
+            "item_name": "Duplicate Test Item",
+            "quantity": 2,
+            "rate": 850,
+            "amount": 850
+          }
+        ]
+      },
+      {
+        "id": "bill-1790441132306",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "SINGLE-01",
+        "date": "2026-09-26",
+        "time": "10:00",
+        "table_no": null,
+        "subtotal": 0,
+        "gst": 0,
+        "total": 150,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790441132306-0",
+            "item_name": "Espresso",
+            "quantity": 1,
+            "rate": 150,
+            "amount": 150
+          }
+        ]
+      },
+      {
+        "id": "bill-1790441004975",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TFS-8921",
+        "date": "2026-09-26",
+        "time": "21:15",
+        "table_no": null,
+        "subtotal": 1250,
+        "gst": 62.5,
+        "total": 1312.5,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790441004975-0",
+            "item_name": "Butter Naan",
+            "quantity": 3,
+            "rate": 70,
+            "amount": 210
+          },
+          {
+            "id": "bi-1790441004975-1",
+            "item_name": "Dal Makhani",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790441004975-2",
+            "item_name": "Paneer Lababdar",
+            "quantity": 1,
+            "rate": 320,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790441004975-3",
+            "item_name": "Jeera Rice",
+            "quantity": 1,
+            "rate": 200,
+            "amount": 200
+          },
+          {
+            "id": "bi-1790441004975-4",
+            "item_name": "Virgin Mojito",
+            "quantity": 2,
+            "rate": 120,
+            "amount": 240
+          }
+        ]
+      },
+      {
+        "id": "bill-1790440544365",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TFS-7482",
+        "date": "2026-09-26",
+        "time": "20:27",
+        "table_no": null,
+        "subtotal": 2190,
+        "gst": 109.5,
+        "total": 2299.5,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790440544365-0",
+            "item_name": "Thai Green Curry (Veg)",
+            "quantity": 1,
+            "rate": 310,
+            "amount": 310
+          },
+          {
+            "id": "bi-1790440544365-1",
+            "item_name": "Chicken Peri Peri Pizza",
+            "quantity": 1,
+            "rate": 420,
+            "amount": 420
+          },
+          {
+            "id": "bi-1790440544365-2",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 330,
+            "amount": 330
+          },
+          {
+            "id": "bi-1790440544365-3",
+            "item_name": "Chicken Tandoori Wings",
+            "quantity": 1,
+            "rate": 380,
+            "amount": 380
+          },
+          {
+            "id": "bi-1790440544365-4",
+            "item_name": "Mango Mocktail",
+            "quantity": 2,
+            "rate": 150,
+            "amount": 300
+          },
+          {
+            "id": "bi-1790440544365-5",
+            "item_name": "Cold Coffee",
+            "quantity": 1,
+            "rate": 140,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790440544365-6",
+            "item_name": "Garlic Cheese Naan",
+            "quantity": 1,
+            "rate": 90,
+            "amount": 90
+          },
+          {
+            "id": "bi-1790440544365-7",
+            "item_name": "Chocolate Lava Cake",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          }
+        ]
+      },
+      {
+        "id": "bill-1790440544353",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TFS-3189",
+        "date": "2026-09-25",
+        "time": "13:20",
+        "table_no": null,
+        "subtotal": 1740,
+        "gst": 87,
+        "total": 1827,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790440544352-0",
+            "item_name": "Peri Peri Fries",
+            "quantity": 1,
+            "rate": 180,
+            "amount": 180
+          },
+          {
+            "id": "bi-1790440544352-1",
+            "item_name": "Paneer Tikka Pizza",
+            "quantity": 1,
+            "rate": 360,
+            "amount": 360
+          },
+          {
+            "id": "bi-1790440544353-2",
+            "item_name": "Veg Hakka Noodles",
+            "quantity": 1,
+            "rate": 240,
+            "amount": 240
+          },
+          {
+            "id": "bi-1790440544353-3",
+            "item_name": "Masala Cold Coffee",
+            "quantity": 2,
+            "rate": 140,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790440544353-4",
+            "item_name": "Lemon Iced Tea",
+            "quantity": 1,
+            "rate": 120,
+            "amount": 120
+          },
+          {
+            "id": "bi-1790440544353-5",
+            "item_name": "Tandoori Momos",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          },
+          {
+            "id": "bi-1790440544353-6",
+            "item_name": "Garlic Bread",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          },
+          {
+            "id": "bi-1790440544353-7",
+            "item_name": "Brownie Sundae",
+            "quantity": 1,
+            "rate": 180,
+            "amount": 180
+          }
+        ]
+      },
+      {
+        "id": "bill-1790440544314",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TFS-2467",
+        "date": "2026-09-03",
+        "time": "14:45",
+        "table_no": null,
+        "subtotal": 2040,
+        "gst": 102,
+        "total": 2142,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790440544314-0",
+            "item_name": "Chicken Manchow Soup",
+            "quantity": 1,
+            "rate": 140,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790440544314-1",
+            "item_name": "Malai Paneer Tikka",
+            "quantity": 1,
+            "rate": 290,
+            "amount": 290
+          },
+          {
+            "id": "bi-1790440544314-2",
+            "item_name": "Dal Makhani",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790440544314-3",
+            "item_name": "Paneer Lababdar",
+            "quantity": 1,
+            "rate": 320,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790440544314-4",
+            "item_name": "Butter Naan",
+            "quantity": 2,
+            "rate": 70,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790440544314-5",
+            "item_name": "Jeera Rice",
+            "quantity": 1,
+            "rate": 200,
+            "amount": 200
+          },
+          {
+            "id": "bi-1790440544314-6",
+            "item_name": "Veg Biryani",
+            "quantity": 1,
+            "rate": 270,
+            "amount": 270
+          },
+          {
+            "id": "bi-1790440544314-7",
+            "item_name": "Virgin Mojito",
+            "quantity": 2,
+            "rate": 120,
+            "amount": 240
+          },
+          {
+            "id": "bi-1790440544314-8",
+            "item_name": "Chocolate Brownie",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          }
+        ]
+      },
+      {
+        "id": "bill-1790438016512",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "BILL-SANDWICH-01",
+        "date": "2026-09-26",
+        "time": "14:30",
+        "table_no": null,
+        "subtotal": 1190,
+        "gst": 60,
+        "total": 1250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790438016511-0",
+            "item_name": "Veg Club Sandwich",
+            "quantity": 2,
+            "rate": 500,
+            "amount": 1000
+          },
+          {
+            "id": "bi-1790438016511-1",
+            "item_name": "Cold Coffee",
+            "quantity": 1,
+            "rate": 190,
+            "amount": 190
+          }
+        ]
+      }
+    ],
+    "rest_usr_1790439421092_g10bub": [
+      {
+        "id": "bill-1790862782324",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-12654",
+        "date": "2026-10-01",
+        "time": "08:15 PM",
+        "table_no": null,
+        "subtotal": 2600,
+        "gst": 130,
+        "total": 2730,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790862782323-0",
+            "item_name": "Cream of Mushroom Soup",
+            "quantity": 2,
+            "rate": 170,
+            "amount": 340
+          },
+          {
+            "id": "bi-1790862782323-1",
+            "item_name": "Paneer Tikka",
+            "quantity": 1,
+            "rate": 320,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790862782323-2",
+            "item_name": "Chicken Schezwan Noodles",
+            "quantity": 1,
+            "rate": 300,
+            "amount": 300
+          },
+          {
+            "id": "bi-1790862782323-3",
+            "item_name": "Peri Peri Chicken Burger",
+            "quantity": 1,
+            "rate": 360,
+            "amount": 360
+          },
+          {
+            "id": "bi-1790862782323-4",
+            "item_name": "Virgin Mojito",
+            "quantity": 2,
+            "rate": 130,
+            "amount": 260
+          },
+          {
+            "id": "bi-1790862782323-5",
+            "item_name": "Fresh Lime Soda",
+            "quantity": 1,
+            "rate": 100,
+            "amount": 100
+          },
+          {
+            "id": "bi-1790862782323-6",
+            "item_name": "Garlic Cheese Naan",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          },
+          {
+            "id": "bi-1790862782323-7",
+            "item_name": "Chocolate Brownie",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          },
+          {
+            "id": "bi-1790862782323-8",
+            "item_name": "Tiramisu (Dessert)",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          }
+        ]
+      },
+      {
+        "id": "bill-1790828006633",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-10837",
+        "date": "2026-10-01",
+        "time": "01:47 PM",
+        "table_no": null,
+        "subtotal": 2060,
+        "gst": 103,
+        "total": 2163,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790828006633-0",
+            "item_name": "Chicken Tikka Masala",
+            "quantity": 1,
+            "rate": 340,
+            "amount": 340
+          },
+          {
+            "id": "bi-1790828006633-1",
+            "item_name": "Paneer Pesto Pasta",
+            "quantity": 1,
+            "rate": 380,
+            "amount": 380
+          },
+          {
+            "id": "bi-1790828006633-2",
+            "item_name": "Peri Peri Fries",
+            "quantity": 1,
+            "rate": 180,
+            "amount": 180
+          },
+          {
+            "id": "bi-1790828006633-3",
+            "item_name": "Virgin Mojito",
+            "quantity": 2,
+            "rate": 140,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790828006633-4",
+            "item_name": "Classic Cold Coffee",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          },
+          {
+            "id": "bi-1790828006633-5",
+            "item_name": "Garlic Bread with Cheese",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          },
+          {
+            "id": "bi-1790828006633-6",
+            "item_name": "Veg Hakka Noodles",
+            "quantity": 1,
+            "rate": 260,
+            "amount": 260
+          },
+          {
+            "id": "bi-1790828006633-7",
+            "item_name": "Chocolate Brownie",
+            "quantity": 1,
+            "rate": 240,
+            "amount": 240
+          }
+        ]
+      },
+      {
+        "id": "bill-1790755604902",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-9164",
+        "date": "2026-09-30",
+        "time": "09:18 PM",
+        "table_no": null,
+        "subtotal": 3300,
+        "gst": 165,
+        "total": 3465,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790755604902-0",
+            "item_name": "Tomato Basil Soup",
+            "quantity": 2,
+            "rate": 320,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790755604902-1",
+            "item_name": "Paneer Peri Peri Starter",
+            "quantity": 1,
+            "rate": 420,
+            "amount": 420
+          },
+          {
+            "id": "bi-1790755604902-2",
+            "item_name": "Chicken Schezwan Momos",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790755604902-3",
+            "item_name": "Veg Loaded Nachos",
+            "quantity": 1,
+            "rate": 360,
+            "amount": 360
+          },
+          {
+            "id": "bi-1790755604902-4",
+            "item_name": "BBQ Chicken Pizza",
+            "quantity": 1,
+            "rate": 520,
+            "amount": 520
+          },
+          {
+            "id": "bi-1790755604902-5",
+            "item_name": "Pasta Alfredo (Veg)",
+            "quantity": 1,
+            "rate": 400,
+            "amount": 400
+          },
+          {
+            "id": "bi-1790755604902-6",
+            "item_name": "Classic Cheeseburger",
+            "quantity": 1,
+            "rate": 380,
+            "amount": 380
+          },
+          {
+            "id": "bi-1790755604902-7",
+            "item_name": "Virgin Strawberry Mojito",
+            "quantity": 2,
+            "rate": 360,
+            "amount": 360
+          },
+          {
+            "id": "bi-1790755604902-8",
+            "item_name": "Tiramisu (Dessert)",
+            "quantity": 1,
+            "rate": 260,
+            "amount": 260
+          }
+        ]
+      },
+      {
+        "id": "bill-1790439715811",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-2467",
+        "date": "2026-09-03",
+        "time": "02:45 PM",
+        "table_no": null,
+        "subtotal": 2040,
+        "gst": 102,
+        "total": 2142,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790439715811-0",
+            "item_name": "Chicken Manchow Soup",
+            "quantity": 1,
+            "rate": 140,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790439715811-1",
+            "item_name": "Malai Paneer Tikka",
+            "quantity": 1,
+            "rate": 290,
+            "amount": 290
+          },
+          {
+            "id": "bi-1790439715811-2",
+            "item_name": "Dal Makhani",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790439715811-3",
+            "item_name": "Paneer Lababdar",
+            "quantity": 1,
+            "rate": 320,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790439715811-4",
+            "item_name": "Butter Naan",
+            "quantity": 2,
+            "rate": 140,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790439715811-5",
+            "item_name": "Jeera Rice",
+            "quantity": 1,
+            "rate": 200,
+            "amount": 200
+          },
+          {
+            "id": "bi-1790439715811-6",
+            "item_name": "Veg Biryani",
+            "quantity": 1,
+            "rate": 270,
+            "amount": 270
+          },
+          {
+            "id": "bi-1790439715811-7",
+            "item_name": "Virgin Mojito",
+            "quantity": 2,
+            "rate": 240,
+            "amount": 240
+          },
+          {
+            "id": "bi-1790439715811-8",
+            "item_name": "Chocolate Brownie",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          }
+        ]
+      },
+      {
+        "id": "bill-1790439681095",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-3189",
+        "date": "2026-09-25",
+        "time": "01:20 PM",
+        "table_no": null,
+        "subtotal": 1740,
+        "gst": 87,
+        "total": 1827,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790439681095-0",
+            "item_name": "Peri Peri Fries",
+            "quantity": 1,
+            "rate": 180,
+            "amount": 180
+          },
+          {
+            "id": "bi-1790439681095-1",
+            "item_name": "Paneer Tikka Pizza",
+            "quantity": 1,
+            "rate": 360,
+            "amount": 360
+          },
+          {
+            "id": "bi-1790439681095-2",
+            "item_name": "Veg Hakka Noodles",
+            "quantity": 1,
+            "rate": 240,
+            "amount": 240
+          },
+          {
+            "id": "bi-1790439681095-3",
+            "item_name": "Masala Cold Coffee",
+            "quantity": 2,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790439681095-4",
+            "item_name": "Lemon Iced Tea",
+            "quantity": 1,
+            "rate": 120,
+            "amount": 120
+          },
+          {
+            "id": "bi-1790439681095-5",
+            "item_name": "Tandoori Momos",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          },
+          {
+            "id": "bi-1790439681095-6",
+            "item_name": "Garlic Bread",
+            "quantity": 1,
+            "rate": 160,
+            "amount": 160
+          },
+          {
+            "id": "bi-1790439681095-7",
+            "item_name": "Brownie Sundae",
+            "quantity": 1,
+            "rate": 180,
+            "amount": 180
+          }
+        ]
+      },
+      {
+        "id": "bill-1790439656738",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "bill_number": "TFS-7482",
+        "date": "2026-09-26",
+        "time": "08:27 PM",
+        "table_no": null,
+        "subtotal": 2190,
+        "gst": 109.5,
+        "total": 2299.5,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790439656738-0",
+            "item_name": "Thai Green Curry (Veg)",
+            "quantity": 1,
+            "rate": 310,
+            "amount": 310
+          },
+          {
+            "id": "bi-1790439656738-1",
+            "item_name": "Chicken Peri Peri Pizza",
+            "quantity": 1,
+            "rate": 420,
+            "amount": 420
+          },
+          {
+            "id": "bi-1790439656738-2",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 1,
+            "rate": 330,
+            "amount": 330
+          },
+          {
+            "id": "bi-1790439656738-3",
+            "item_name": "Chicken Tandoori Wings",
+            "quantity": 1,
+            "rate": 380,
+            "amount": 380
+          },
+          {
+            "id": "bi-1790439656738-4",
+            "item_name": "Mango Mocktail",
+            "quantity": 2,
+            "rate": 300,
+            "amount": 300
+          },
+          {
+            "id": "bi-1790439656738-5",
+            "item_name": "Cold Coffee",
+            "quantity": 1,
+            "rate": 140,
+            "amount": 140
+          },
+          {
+            "id": "bi-1790439656738-6",
+            "item_name": "Garlic Cheese Naan",
+            "quantity": 1,
+            "rate": 90,
+            "amount": 90
+          },
+          {
+            "id": "bi-1790439656738-7",
+            "item_name": "Chocolate Lava Cake",
+            "quantity": 1,
+            "rate": 220,
+            "amount": 220
+          }
+        ]
+      }
+    ],
+    "rest_usr_1790756780128_b5cefu": [
+      {
+        "id": "bill-1790756795323",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "bill_number": "BILL-45934",
+        "date": "2026-09-30",
+        "time": "13:56",
+        "table_no": null,
+        "subtotal": 0,
+        "gst": 0,
+        "total": 0,
+        "payment_mode": "UPI",
+        "bill_items": []
+      },
+      {
+        "id": "bill-1790756795307",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "bill_number": "BILL-4012",
+        "date": "2026-09-30",
+        "time": "20:15",
+        "table_no": null,
+        "subtotal": 0,
+        "gst": 0,
+        "total": 1386,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790756795307-0",
+            "item_name": "Butter Naan",
+            "quantity": 1,
+            "rate": 60,
+            "amount": 60
+          }
+        ]
+      },
+      {
+        "id": "bill-1790756795288",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "bill_number": "BILL-4012",
+        "date": "2026-09-30",
+        "time": "20:15",
+        "table_no": "Table 6",
+        "subtotal": 1320,
+        "gst": 66,
+        "total": 1386,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790756795288-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 2,
+            "rate": 640,
+            "amount": 640
+          },
+          {
+            "id": "bi-1790756795288-1",
+            "item_name": "Butter Naan",
+            "quantity": 4,
+            "rate": 240,
+            "amount": 240
+          },
+          {
+            "id": "bi-1790756795288-2",
+            "item_name": "Dal Makhani",
+            "quantity": 1,
+            "rate": 280,
+            "amount": 280
+          },
+          {
+            "id": "bi-1790756795288-3",
+            "item_name": "Sweet Lassi",
+            "quantity": 2,
+            "rate": 160,
+            "amount": 160
+          }
+        ]
+      }
+    ],
+    "rest_usr_1790757434556_qkdw8c": [
+      {
+        "id": "bill-1790757434578",
+        "restaurant_id": "rest_usr_1790757434556_qkdw8c",
+        "bill_number": "EDIT-9988",
+        "date": "2026-09-30",
+        "time": "21:00",
+        "table_no": null,
+        "subtotal": 1160,
+        "gst": 180,
+        "total": 1340,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790757434578-0",
+            "item_name": "Mutton Rogan Josh Special",
+            "quantity": 3,
+            "rate": 280,
+            "amount": 840
+          },
+          {
+            "id": "bi-1790757434578-1",
+            "item_name": "Garlic Naan",
+            "quantity": 4,
+            "rate": 80,
+            "amount": 320
+          },
+          {
+            "id": "bi-1790757434578-2",
+            "item_name": "Kulfi Falooda",
+            "quantity": 2,
+            "rate": 90,
+            "amount": 180
+          }
+        ]
+      }
+    ],
+    "rest_usr_1790844816217_05cl40": [
+      {
+        "id": "bill-1790844867784",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-35-7494",
+        "date": "2026-10-01",
+        "time": "12:35",
+        "table_no": null,
+        "subtotal": 850,
+        "gst": 60,
+        "total": 910,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867784-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 850,
+            "amount": 850
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867778",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-34-7494",
+        "date": "2026-10-01",
+        "time": "12:34",
+        "table_no": null,
+        "subtotal": 840,
+        "gst": 59,
+        "total": 899,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867778-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 840,
+            "amount": 840
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867772",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-33-7494",
+        "date": "2026-10-01",
+        "time": "12:33",
+        "table_no": null,
+        "subtotal": 830,
+        "gst": 58,
+        "total": 888,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867772-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 830,
+            "amount": 830
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867765",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-32-7493",
+        "date": "2026-10-01",
+        "time": "12:32",
+        "table_no": null,
+        "subtotal": 820,
+        "gst": 57,
+        "total": 877,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867765-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 820,
+            "amount": 820
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867757",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-31-7493",
+        "date": "2026-10-01",
+        "time": "12:31",
+        "table_no": null,
+        "subtotal": 810,
+        "gst": 56,
+        "total": 866,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867757-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 810,
+            "amount": 810
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867749",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-30-7493",
+        "date": "2026-10-01",
+        "time": "12:30",
+        "table_no": null,
+        "subtotal": 800,
+        "gst": 55,
+        "total": 855,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867749-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 800,
+            "amount": 800
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867743",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-29-7493",
+        "date": "2026-10-01",
+        "time": "12:29",
+        "table_no": null,
+        "subtotal": 790,
+        "gst": 54,
+        "total": 844,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867743-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 790,
+            "amount": 790
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867738",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-28-7493",
+        "date": "2026-10-01",
+        "time": "12:28",
+        "table_no": null,
+        "subtotal": 780,
+        "gst": 53,
+        "total": 833,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867738-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 780,
+            "amount": 780
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867730",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-27-7493",
+        "date": "2026-10-01",
+        "time": "12:27",
+        "table_no": null,
+        "subtotal": 770,
+        "gst": 52,
+        "total": 822,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867730-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 770,
+            "amount": 770
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867725",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-26-7493",
+        "date": "2026-10-01",
+        "time": "12:26",
+        "table_no": null,
+        "subtotal": 760,
+        "gst": 51,
+        "total": 811,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867725-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 760,
+            "amount": 760
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867718",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-25-7493",
+        "date": "2026-10-01",
+        "time": "12:25",
+        "table_no": null,
+        "subtotal": 750,
+        "gst": 50,
+        "total": 800,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867718-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 750,
+            "amount": 750
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867711",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-24-7493",
+        "date": "2026-10-01",
+        "time": "12:24",
+        "table_no": null,
+        "subtotal": 740,
+        "gst": 49,
+        "total": 789,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867711-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 740,
+            "amount": 740
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867705",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-23-7493",
+        "date": "2026-10-01",
+        "time": "12:23",
+        "table_no": null,
+        "subtotal": 730,
+        "gst": 48,
+        "total": 778,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867705-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 730,
+            "amount": 730
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867699",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-22-7493",
+        "date": "2026-10-01",
+        "time": "12:22",
+        "table_no": null,
+        "subtotal": 720,
+        "gst": 47,
+        "total": 767,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867699-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 720,
+            "amount": 720
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867691",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-21-7493",
+        "date": "2026-10-01",
+        "time": "12:21",
+        "table_no": null,
+        "subtotal": 710,
+        "gst": 46,
+        "total": 756,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867691-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 710,
+            "amount": 710
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867685",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-20-7493",
+        "date": "2026-10-01",
+        "time": "12:20",
+        "table_no": null,
+        "subtotal": 700,
+        "gst": 45,
+        "total": 745,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867685-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 700,
+            "amount": 700
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867678",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-19-7493",
+        "date": "2026-10-01",
+        "time": "12:19",
+        "table_no": null,
+        "subtotal": 690,
+        "gst": 44,
+        "total": 734,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867678-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 690,
+            "amount": 690
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867672",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-18-7493",
+        "date": "2026-10-01",
+        "time": "12:18",
+        "table_no": null,
+        "subtotal": 680,
+        "gst": 43,
+        "total": 723,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867672-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 680,
+            "amount": 680
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867665",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-17-7493",
+        "date": "2026-10-01",
+        "time": "12:17",
+        "table_no": null,
+        "subtotal": 670,
+        "gst": 42,
+        "total": 712,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867665-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 670,
+            "amount": 670
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867660",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-16-7492",
+        "date": "2026-10-01",
+        "time": "12:16",
+        "table_no": null,
+        "subtotal": 660,
+        "gst": 41,
+        "total": 701,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867659-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 660,
+            "amount": 660
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867654",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-15-7492",
+        "date": "2026-10-01",
+        "time": "12:15",
+        "table_no": null,
+        "subtotal": 650,
+        "gst": 40,
+        "total": 690,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867654-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 650,
+            "amount": 650
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867647",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-14-7492",
+        "date": "2026-10-01",
+        "time": "12:14",
+        "table_no": null,
+        "subtotal": 640,
+        "gst": 39,
+        "total": 679,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867647-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 640,
+            "amount": 640
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867642",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-13-7492",
+        "date": "2026-10-01",
+        "time": "12:13",
+        "table_no": null,
+        "subtotal": 630,
+        "gst": 38,
+        "total": 668,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867642-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 630,
+            "amount": 630
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867636",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-12-7492",
+        "date": "2026-10-01",
+        "time": "12:12",
+        "table_no": null,
+        "subtotal": 620,
+        "gst": 37,
+        "total": 657,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867636-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 620,
+            "amount": 620
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867629",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-11-7492",
+        "date": "2026-10-01",
+        "time": "12:11",
+        "table_no": null,
+        "subtotal": 610,
+        "gst": 36,
+        "total": 646,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867629-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 610,
+            "amount": 610
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867621",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-10-7492",
+        "date": "2026-10-01",
+        "time": "12:10",
+        "table_no": null,
+        "subtotal": 600,
+        "gst": 35,
+        "total": 635,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867621-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 600,
+            "amount": 600
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867614",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-9-7492",
+        "date": "2026-10-01",
+        "time": "12:09",
+        "table_no": null,
+        "subtotal": 590,
+        "gst": 34,
+        "total": 624,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867614-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 590,
+            "amount": 590
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867609",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-8-7492",
+        "date": "2026-10-01",
+        "time": "12:08",
+        "table_no": null,
+        "subtotal": 580,
+        "gst": 33,
+        "total": 613,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867609-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 580,
+            "amount": 580
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867601",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-7-7492",
+        "date": "2026-10-01",
+        "time": "12:07",
+        "table_no": null,
+        "subtotal": 570,
+        "gst": 32,
+        "total": 602,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867601-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 570,
+            "amount": 570
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867595",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-6-7492",
+        "date": "2026-10-01",
+        "time": "12:06",
+        "table_no": null,
+        "subtotal": 560,
+        "gst": 31,
+        "total": 591,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867595-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 560,
+            "amount": 560
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867589",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-5-7492",
+        "date": "2026-10-01",
+        "time": "12:05",
+        "table_no": null,
+        "subtotal": 550,
+        "gst": 30,
+        "total": 580,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867589-0",
+            "item_name": "Bulk Item 1",
+            "quantity": 1,
+            "rate": 550,
+            "amount": 550
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867579",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-4-7492",
+        "date": "2026-10-01",
+        "time": "12:04",
+        "table_no": null,
+        "subtotal": 540,
+        "gst": 29,
+        "total": 569,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867579-0",
+            "item_name": "Bulk Item 5",
+            "quantity": 1,
+            "rate": 540,
+            "amount": 540
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867574",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-3-7492",
+        "date": "2026-10-01",
+        "time": "12:03",
+        "table_no": null,
+        "subtotal": 530,
+        "gst": 28,
+        "total": 558,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867574-0",
+            "item_name": "Bulk Item 4",
+            "quantity": 1,
+            "rate": 530,
+            "amount": 530
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867565",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-2-7492",
+        "date": "2026-10-01",
+        "time": "12:02",
+        "table_no": null,
+        "subtotal": 520,
+        "gst": 27,
+        "total": 547,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867565-0",
+            "item_name": "Bulk Item 3",
+            "quantity": 1,
+            "rate": 520,
+            "amount": 520
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844867533",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "BULK-1-7491",
+        "date": "2026-10-01",
+        "time": "12:01",
+        "table_no": null,
+        "subtotal": 510,
+        "gst": 26,
+        "total": 536,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844867533-0",
+            "item_name": "Bulk Item 2",
+            "quantity": 1,
+            "rate": 510,
+            "amount": 510
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844822149",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "SEP-BILL-2146",
+        "date": "2026-09-28",
+        "time": "20:15",
+        "table_no": null,
+        "subtotal": 2400,
+        "gst": 120,
+        "total": 2520,
+        "payment_mode": "Card",
+        "bill_items": [
+          {
+            "id": "bi-1790844822149-0",
+            "item_name": "Biryani Special",
+            "quantity": 2,
+            "rate": 800,
+            "amount": 1600
+          },
+          {
+            "id": "bi-1790844822149-1",
+            "item_name": "Gulab Jamun",
+            "quantity": 4,
+            "rate": 200,
+            "amount": 800
+          }
+        ]
+      },
+      {
+        "id": "bill-1790844822131",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "bill_number": "QA-BILL-2128",
+        "date": "2026-10-01",
+        "time": "13:45",
+        "table_no": null,
+        "subtotal": 1200,
+        "gst": 60,
+        "total": 1260,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1790844822131-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 2,
+            "rate": 300,
+            "amount": 600
+          },
+          {
+            "id": "bi-1790844822131-1",
+            "item_name": "Garlic Naan",
+            "quantity": 4,
+            "rate": 100,
+            "amount": 400
+          },
+          {
+            "id": "bi-1790844822131-2",
+            "item_name": "Sweet Lassi",
+            "quantity": 2,
+            "rate": 100,
+            "amount": 200
+          }
+        ]
+      }
+    ]
+  },
+  "notifications": {
+    "rest_usr_1790439421092_g10bub": [
+      {
+        "id": "notif_1790876528740_aok9b",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "daily_summary",
+        "dedup_key": "daily_summary_2026-10-01",
+        "title": "🌙 Daily Pulse: ₹4,893",
+        "message": "2 bills (avg ₹2,447). Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes.",
+        "data": {
+          "totalRevenue": 4893,
+          "billsCaptured": 2,
+          "avgBillValue": 2446.5,
+          "busiestHour": "8 AM - 9 AM",
+          "topItem": "Virgin Mojito",
+          "yesterdayRevenue": 3465,
+          "aiAdvice": "Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T17:42:08.740Z"
+      },
+      {
+        "id": "notif_1790876513576_fpuls",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "daily_summary",
+        "dedup_key": "daily_summary_2026-10-01",
+        "title": "🌙 Daily Pulse: ₹4,893",
+        "message": "2 bills (avg ₹2,447). Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes.",
+        "data": {
+          "totalRevenue": 4893,
+          "billsCaptured": 2,
+          "avgBillValue": 2446.5,
+          "busiestHour": "8 AM - 9 AM",
+          "topItem": "Virgin Mojito",
+          "yesterdayRevenue": 3465,
+          "aiAdvice": "Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T17:41:53.576Z"
+      },
+      {
+        "id": "notif_1790876509019_urkhv",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "daily_summary",
+        "dedup_key": "daily_summary_2026-10-01",
+        "title": "🌙 Daily Pulse: ₹4,893",
+        "message": "2 bills (avg ₹2,447). Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes.",
+        "data": {
+          "totalRevenue": 4893,
+          "billsCaptured": 2,
+          "avgBillValue": 2446.5,
+          "busiestHour": "8 AM - 9 AM",
+          "topItem": "Virgin Mojito",
+          "yesterdayRevenue": 3465,
+          "aiAdvice": "Virgin Mojito was today's top seller (4 orders)—consider featuring it in a lunch combo tomorrow to drive higher bill sizes."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T17:41:49.019Z"
+      },
+      {
+        "id": "notif_1790862786057_dwbg1",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-10-01",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹4,893, beating your previous record of ₹3,465!",
+        "data": {
+          "todayRev": 4893,
+          "previousRecord": 3465,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T13:53:06.057Z"
+      },
+      {
+        "id": "notif_1790828010867_t3dsk",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-10-01",
+        "title": "📈 Trailing 7-Day Average Beaten by 99%!",
+        "message": "Today's revenue (₹2,163) beat your trailing 7-day daily average of ₹1,085 by 99%.",
+        "data": {
+          "todayRev": 2163,
+          "trailing7Avg": 1084.5,
+          "marginPercent": 99,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T04:13:30.867Z"
+      },
+      {
+        "id": "notif_1790755604963_6ghhp",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-09-30",
+        "title": "📈 Trailing 7-Day Average Beaten by 488%!",
+        "message": "Today's revenue (₹3,465) beat your trailing 7-day daily average of ₹590 by 488%.",
+        "data": {
+          "todayRev": 3465,
+          "trailing7Avg": 589.5,
+          "marginPercent": 488,
+          "date": "2026-09-30"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:06:44.964Z"
+      },
+      {
+        "id": "notif_1790755604957_jekv0",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-09-30",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹3,465, beating your previous record of ₹2,300!",
+        "data": {
+          "todayRev": 3465,
+          "previousRecord": 2299.5,
+          "date": "2026-09-30"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:06:44.957Z"
+      },
+      {
+        "id": "notif_1790446417427_dt0zw",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "daily_summary",
+        "dedup_key": "daily_summary_2026-09-26",
+        "title": "🌙 Daily Pulse: ₹2,300",
+        "message": "1 bills (avg ₹2,300). Prep mango mocktail ingredients before the 8 AM rush tomorrow and bundle them with breakfast sandwiches to drive higher morning order volume.",
+        "data": {
+          "totalRevenue": 2299.5,
+          "billsCaptured": 1,
+          "avgBillValue": 2299.5,
+          "busiestHour": "8 AM - 9 AM",
+          "topItem": "Mango Mocktail",
+          "yesterdayRevenue": 1827,
+          "aiAdvice": "Prep mango mocktail ingredients before the 8 AM rush tomorrow and bundle them with breakfast sandwiches to drive higher morning order volume."
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T18:13:37.427Z"
+      },
+      {
+        "id": "notif_1790444678497_psvon",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-09-26",
+        "title": "📈 Trailing 7-Day Average Beaten by 781%!",
+        "message": "Today's revenue (₹2,300) beat your trailing 7-day daily average of ₹261 by 781%.",
+        "data": {
+          "todayRev": 2299.5,
+          "trailing7Avg": 261,
+          "marginPercent": 781,
+          "date": "2026-09-26"
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:44:38.497Z"
+      },
+      {
+        "id": "notif_1790444678482_iccs0",
+        "restaurant_id": "rest_usr_1790439421092_g10bub",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-09-26",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹2,300, beating your previous record of ₹2,142!",
+        "data": {
+          "todayRev": 2299.5,
+          "previousRecord": 2142,
+          "date": "2026-09-26"
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:44:38.482Z"
+      }
+    ],
+    "rest_usr_1790438016491_ngvkt7": [
+      {
+        "id": "notif_1790844656275_yaby5",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_bills_alltime_50",
+        "title": "🎉 Milestone reached: 50 bills captured!",
+        "message": "You've recorded 50 bills with DineIQ. Great operational consistency!",
+        "data": {
+          "id": "bills_alltime_50",
+          "type": "bill_count",
+          "title": "🎉 Milestone reached: 50 bills captured!",
+          "headline": "50+ bills captured",
+          "description": "You've recorded 50 bills with DineIQ. Great operational consistency!",
+          "threshold": 50,
+          "value": 50,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:50:56.275Z"
+      },
+      {
+        "id": "notif_1790844656271_j0lzo",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_rev_month_10000_2026-10",
+        "title": "🎉 You crossed ₹10,000 this month!",
+        "message": "₹26,565 recorded in October 2026. Outstanding progress!",
+        "data": {
+          "id": "rev_month_10000_2026-10",
+          "type": "monthly_revenue",
+          "title": "🎉 You crossed ₹10,000 this month!",
+          "headline": "Crossed ₹10,000",
+          "description": "₹26,565 recorded in October 2026. Outstanding progress!",
+          "threshold": 10000,
+          "month": "2026-10",
+          "value": 26565,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:50:56.271Z"
+      },
+      {
+        "id": "notif_1790844656266_yp4rm",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_rev_month_25000_2026-10",
+        "title": "🎉 You crossed ₹25,000 this month!",
+        "message": "₹26,565 recorded in October 2026. Outstanding progress!",
+        "data": {
+          "id": "rev_month_25000_2026-10",
+          "type": "monthly_revenue",
+          "title": "🎉 You crossed ₹25,000 this month!",
+          "headline": "Crossed ₹25,000",
+          "description": "₹26,565 recorded in October 2026. Outstanding progress!",
+          "threshold": 25000,
+          "month": "2026-10",
+          "value": 26565,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:50:56.266Z"
+      },
+      {
+        "id": "notif_1790844656260_n2dxx",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-10-01",
+        "title": "📈 Trailing 7-Day Average Beaten by 1411%!",
+        "message": "Today's revenue (₹26,565) beat your trailing 7-day daily average of ₹1,758 by 1411%.",
+        "data": {
+          "todayRev": 26565,
+          "trailing7Avg": 1758.4285714285713,
+          "marginPercent": 1411,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:50:56.260Z"
+      },
+      {
+        "id": "notif_1790844653447_zsmt8",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-10-01",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹26,565, beating your previous record of ₹5,012!",
+        "data": {
+          "todayRev": 26565,
+          "previousRecord": 5012,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:50:53.447Z"
+      },
+      {
+        "id": "notif_1790829069720_x4zmp",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_bills_alltime_10",
+        "title": "🎉 Milestone reached: 10 bills captured!",
+        "message": "You've recorded 13 bills with DineIQ. Great operational consistency!",
+        "data": {
+          "id": "bills_alltime_10",
+          "type": "bill_count",
+          "title": "🎉 Milestone reached: 10 bills captured!",
+          "headline": "10+ bills captured",
+          "description": "You've recorded 13 bills with DineIQ. Great operational consistency!",
+          "threshold": 10,
+          "value": 13,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T04:31:09.720Z"
+      },
+      {
+        "id": "notif_1790829069660_2v4n7",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_rev_month_10000_2026-09",
+        "title": "🎉 You crossed ₹10,000 this month!",
+        "message": "₹11,931 recorded in September 2026. Outstanding progress!",
+        "data": {
+          "id": "rev_month_10000_2026-09",
+          "type": "monthly_revenue",
+          "title": "🎉 You crossed ₹10,000 this month!",
+          "headline": "Crossed ₹10,000",
+          "description": "₹11,931 recorded in September 2026. Outstanding progress!",
+          "threshold": 10000,
+          "month": "2026-09",
+          "value": 11931,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T04:31:09.660Z"
+      },
+      {
+        "id": "notif_1790446298508_3yc36",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "daily_summary",
+        "dedup_key": "daily_summary_2026-09-26",
+        "title": "🌙 Daily Pulse: ₹5,012",
+        "message": "4 bills (avg ₹1,253). Prep extra tandoor dough before the 8 PM rush tomorrow and train staff to upsell high-margin curries with every Butter Naan order.",
+        "data": {
+          "totalRevenue": 5012,
+          "billsCaptured": 4,
+          "avgBillValue": 1253,
+          "busiestHour": "8 PM - 9 PM",
+          "topItem": "Butter Naan",
+          "yesterdayRevenue": 1827,
+          "aiAdvice": "Prep extra tandoor dough before the 8 PM rush tomorrow and train staff to upsell high-margin curries with every Butter Naan order."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T18:11:38.508Z"
+      },
+      {
+        "id": "notif_1790445294190_93rfs",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "license_expiring",
+        "dedup_key": "license_warning_60d_Fire Safety NOC_2026-11-15",
+        "title": "⚠️ Fire Safety NOC expires in 50 days — renew soon",
+        "message": "Expires on 2026-11-15. Please prepare your renewal documents.",
+        "data": {
+          "name": "Fire Safety NOC",
+          "expiryDate": "2026-11-15",
+          "daysRemaining": 50,
+          "status": "warning",
+          "severity": "warning",
+          "badge": "50 DAYS LEFT",
+          "title": "⚠️ Fire Safety NOC expires in 50 days — renew soon",
+          "message": "Expires on 2026-11-15. Please prepare your renewal documents."
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:54:54.190Z"
+      },
+      {
+        "id": "notif_1790445293357_9y0lw",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "license_expiring",
+        "dedup_key": "license_urgent_30d_FSSAI license_2026-10-19",
+        "title": "⚠️ FSSAI license expires in 23 days — renew soon",
+        "message": "Expires on 2026-10-19. Action required within 23 days to ensure uninterrupted operations.",
+        "data": {
+          "name": "FSSAI license",
+          "expiryDate": "2026-10-19",
+          "daysRemaining": 23,
+          "status": "urgent",
+          "severity": "urgent",
+          "badge": "23 DAYS LEFT",
+          "title": "⚠️ FSSAI license expires in 23 days — renew soon",
+          "message": "Expires on 2026-10-19. Action required within 23 days to ensure uninterrupted operations."
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:54:53.357Z"
+      },
+      {
+        "id": "notif_1790445293055_i5p4d",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-09-26",
+        "title": "📈 Trailing 7-Day Average Beaten by 1820%!",
+        "message": "Today's revenue (₹5,012) beat your trailing 7-day daily average of ₹261 by 1820%.",
+        "data": {
+          "todayRev": 5012,
+          "trailing7Avg": 261,
+          "marginPercent": 1820,
+          "date": "2026-09-26"
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:54:53.055Z"
+      },
+      {
+        "id": "notif_1790445291506_4cfne",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-09-26",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹5,012, beating your previous record of ₹2,142!",
+        "data": {
+          "todayRev": 5012,
+          "previousRecord": 2142,
+          "date": "2026-09-26"
+        },
+        "is_read": true,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-26T17:54:51.506Z"
+      }
+    ],
+    "rest_usr_1790756780128_b5cefu": [
+      {
+        "id": "notif_1790756800354_m7o0a",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-09-30",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹2,772, beating your previous record of ₹0!",
+        "data": {
+          "todayRev": 2772,
+          "previousRecord": 0,
+          "date": "2026-09-30"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:26:40.354Z"
+      },
+      {
+        "id": "notif_1790756795261_3a89t",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "trigger_type": "license_expiring",
+        "dedup_key": "license_warning_60d_Health Trade License_2026-11-01",
+        "title": "⚠️ Health Trade License expires in 32 days — renew soon",
+        "message": "Expires on 2026-11-01. Please prepare your renewal documents.",
+        "data": {
+          "name": "Health Trade License",
+          "expiryDate": "2026-11-01",
+          "daysRemaining": 32,
+          "status": "warning",
+          "severity": "warning",
+          "badge": "32 DAYS LEFT",
+          "title": "⚠️ Health Trade License expires in 32 days — renew soon",
+          "message": "Expires on 2026-11-01. Please prepare your renewal documents."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:26:35.261Z"
+      },
+      {
+        "id": "notif_1790756795196_obax7",
+        "restaurant_id": "rest_usr_1790756780128_b5cefu",
+        "trigger_type": "license_expiring",
+        "dedup_key": "license_urgent_30d_FSSAI license_2026-10-15",
+        "title": "⚠️ FSSAI license expires in 15 days — renew soon",
+        "message": "Expires on 2026-10-15. Action required within 15 days to ensure uninterrupted operations.",
+        "data": {
+          "name": "FSSAI license",
+          "expiryDate": "2026-10-15",
+          "daysRemaining": 15,
+          "status": "urgent",
+          "severity": "urgent",
+          "badge": "15 DAYS LEFT",
+          "title": "⚠️ FSSAI license expires in 15 days — renew soon",
+          "message": "Expires on 2026-10-15. Action required within 15 days to ensure uninterrupted operations."
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:26:35.196Z"
+      }
+    ],
+    "rest_usr_1790757434556_qkdw8c": [
+      {
+        "id": "notif_1790757435333_t0kpv",
+        "restaurant_id": "rest_usr_1790757434556_qkdw8c",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-09-30",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹1,340, beating your previous record of ₹0!",
+        "data": {
+          "todayRev": 1340,
+          "previousRecord": 0,
+          "date": "2026-09-30"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-09-30T08:37:15.333Z"
+      }
+    ],
+    "rest_usr_1790844816217_05cl40": [
+      {
+        "id": "notif_1790844874426_8po4y",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_bills_alltime_10",
+        "title": "🎉 Milestone reached: 10 bills captured!",
+        "message": "You've recorded 37 bills with DineIQ. Great operational consistency!",
+        "data": {
+          "id": "bills_alltime_10",
+          "type": "bill_count",
+          "title": "🎉 Milestone reached: 10 bills captured!",
+          "headline": "10+ bills captured",
+          "description": "You've recorded 37 bills with DineIQ. Great operational consistency!",
+          "threshold": 10,
+          "value": 37,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:54:34.426Z"
+      },
+      {
+        "id": "notif_1790844874421_w7i3y",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_rev_month_10000_2026-10",
+        "title": "🎉 You crossed ₹10,000 this month!",
+        "message": "₹26,565 recorded in October 2026. Outstanding progress!",
+        "data": {
+          "id": "rev_month_10000_2026-10",
+          "type": "monthly_revenue",
+          "title": "🎉 You crossed ₹10,000 this month!",
+          "headline": "Crossed ₹10,000",
+          "description": "₹26,565 recorded in October 2026. Outstanding progress!",
+          "threshold": 10000,
+          "month": "2026-10",
+          "value": 26565,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:54:34.421Z"
+      },
+      {
+        "id": "notif_1790844874416_l6fng",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "trigger_type": "milestone",
+        "dedup_key": "milestone_notif_rev_month_25000_2026-10",
+        "title": "🎉 You crossed ₹25,000 this month!",
+        "message": "₹26,565 recorded in October 2026. Outstanding progress!",
+        "data": {
+          "id": "rev_month_25000_2026-10",
+          "type": "monthly_revenue",
+          "title": "🎉 You crossed ₹25,000 this month!",
+          "headline": "Crossed ₹25,000",
+          "description": "₹26,565 recorded in October 2026. Outstanding progress!",
+          "threshold": 25000,
+          "month": "2026-10",
+          "value": 26565,
+          "isAcknowledged": false
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:54:34.416Z"
+      },
+      {
+        "id": "notif_1790844874126_2akve",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "trigger_type": "best_day_ever",
+        "dedup_key": "best_day_ever_2026-10-01",
+        "title": "🏆 New Best-Day-Ever Record!",
+        "message": "Today's revenue reached ₹26,565, beating your previous record of ₹2,520!",
+        "data": {
+          "todayRev": 26565,
+          "previousRecord": 2520,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:54:34.126Z"
+      },
+      {
+        "id": "notif_1790844827172_dta7t",
+        "restaurant_id": "rest_usr_1790844816217_05cl40",
+        "trigger_type": "weekly_average",
+        "dedup_key": "weekly_avg_crossed_2026-10-01",
+        "title": "📈 Trailing 7-Day Average Beaten by 250%!",
+        "message": "Today's revenue (₹1,260) beat your trailing 7-day daily average of ₹360 by 250%.",
+        "data": {
+          "todayRev": 1260,
+          "trailing7Avg": 360,
+          "marginPercent": 250,
+          "date": "2026-10-01"
+        },
+        "is_read": false,
+        "delivered_channels": [
+          "in_app"
+        ],
+        "created_at": "2026-10-01T08:53:47.172Z"
+      }
+    ]
+  }
+}

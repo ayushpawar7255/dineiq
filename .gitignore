@@ -15,8 +15,9 @@ dist-ssr
 .env.*
 !.env.example
 backend/.env
-backend/.env.*
-backend/data/store.json
+# Executables
+*.exe
+*.zip
 
 # Editor directories and files
 .vscode/*
