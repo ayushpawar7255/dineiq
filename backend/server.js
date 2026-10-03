@@ -17,9 +17,16 @@ const STORE_FILE = path.join(DATA_DIR, 'store.json')
 const app = express()
 const port = Number(process.env.PORT || 8787)
 const configuredRestaurantId = process.env.RESTAURANT_ID
-const supabase = process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
-  ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY)
-  : null
+let supabase = null
+try {
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    })
+  }
+} catch (err) {
+  console.warn('[supabase] initialization error, continuing with local store:', err.message)
+}
 
 // Empty restaurant schema
 const EMPTY_RESTAURANT = {
