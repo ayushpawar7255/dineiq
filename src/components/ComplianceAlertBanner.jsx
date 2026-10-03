@@ -1,4 +1,36 @@
-import { AlertOctagon, AlertTriangle, ArrowRight, Clock, ShieldAlert } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { AlertOctagon, AlertTriangle, ArrowRight, Clock, ShieldAlert, X } from 'lucide-react'
+
+export const COMPLIANCE_DISMISS_STORAGE_KEY = 'dineq:dismissed-compliance-alert'
+
+export function isAlertDismissed(primaryAlert) {
+  if (!primaryAlert || typeof window === 'undefined') return false
+  try {
+    const raw = sessionStorage.getItem(COMPLIANCE_DISMISS_STORAGE_KEY)
+    if (!raw) return false
+    const parsed = JSON.parse(raw)
+
+    // If it's a completely different license or alert ID, don't dismiss
+    if (parsed.alertId !== primaryAlert.id) return false
+
+    // Severity hierarchy: warning (1) < urgent (2) < expired (3)
+    const SEVERITY_WEIGHT = { warning: 1, urgent: 2, expired: 3 }
+    const currentWeight = SEVERITY_WEIGHT[primaryAlert.severity] || 0
+    const dismissedWeight = SEVERITY_WEIGHT[parsed.severity] || 0
+
+    // If urgency level increased (e.g. from warning to urgent, or urgent to expired), reappear!
+    if (currentWeight > dismissedWeight) return false
+
+    // If days remaining crossed critical thresholds (e.g. was >30 days, now <=30 days)
+    if (parsed.daysRemaining > 30 && primaryAlert.daysRemaining <= 30) return false
+    // If was not yet expired (>0 days), but is now expired (<=0 days)
+    if (parsed.daysRemaining > 0 && primaryAlert.daysRemaining <= 0) return false
+
+    return true
+  } catch {
+    return false
+  }
+}
 
 export function evaluateLicenseCompliance(restaurant = {}) {
   const alerts = []
@@ -122,11 +154,36 @@ export function evaluateLicenseCompliance(restaurant = {}) {
   return alerts
 }
 
-export function ComplianceAlertBanner({ alerts = [], onNavigate }) {
+export function ComplianceAlertBanner({ alerts = [], onNavigate, onDismiss }) {
   if (!alerts || alerts.length === 0) return null
 
   // Highlight the most critical alert
   const primaryAlert = alerts[0]
+  const [dismissed, setDismissed] = useState(() => isAlertDismissed(primaryAlert))
+
+  useEffect(() => {
+    setDismissed(isAlertDismissed(primaryAlert))
+  }, [primaryAlert?.id, primaryAlert?.severity, primaryAlert?.daysRemaining])
+
+  if (dismissed) return null
+
+  const handleDismiss = (e) => {
+    e.stopPropagation()
+    try {
+      sessionStorage.setItem(
+        COMPLIANCE_DISMISS_STORAGE_KEY,
+        JSON.stringify({
+          alertId: primaryAlert.id,
+          severity: primaryAlert.severity,
+          daysRemaining: primaryAlert.daysRemaining,
+          dismissedAt: Date.now(),
+        })
+      )
+    } catch {}
+    setDismissed(true)
+    onDismiss?.(primaryAlert)
+  }
+
   const isRed = primaryAlert.severity === 'expired' || primaryAlert.severity === 'urgent'
   const isExpired = primaryAlert.severity === 'expired'
 
@@ -136,6 +193,16 @@ export function ComplianceAlertBanner({ alerts = [], onNavigate }) {
       role="alert"
       aria-live="assertive"
     >
+      <button
+        type="button"
+        className="compliance-close-btn"
+        onClick={handleDismiss}
+        aria-label="Dismiss license expiry warning"
+        title="Dismiss for this session"
+      >
+        <X size={15} />
+      </button>
+
       <div className="compliance-icon-wrap">
         {isExpired ? (
           <AlertOctagon size={24} className="compliance-alert-icon" />

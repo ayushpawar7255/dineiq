@@ -3529,11 +3529,13 @@ tbody td strong {
    Compliance & License Alert Banners
    ========================================================================== */
 .compliance-banner {
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
   padding: 18px 22px;
+  padding-right: 48px;
   margin-bottom: 24px;
   border-radius: var(--radius-md);
   box-sizing: border-box;
@@ -3754,6 +3756,44 @@ tbody td strong {
   white-space: nowrap;
 }
 
+.compliance-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 2;
+}
+
+.compliance-close-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.compliance-banner--warning .compliance-close-btn:hover {
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--color-orange);
+  border-color: var(--color-orange-soft);
+}
+
+.compliance-banner--urgent .compliance-close-btn:hover,
+.compliance-banner--expired .compliance-close-btn:hover {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
 /* ==========================================================================
    Settings - Other Licenses & Permits Form UI
    ========================================================================== */
@@ -3872,6 +3912,11 @@ tbody td strong {
   .compliance-banner {
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 44px;
+  }
+  .compliance-close-btn {
+    top: 12px;
+    right: 12px;
   }
   .compliance-action-wrap {
     width: 100%;
