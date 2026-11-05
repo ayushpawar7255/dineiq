@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { AlertTriangle, ArrowRight, Bell, Calendar, ChevronRight, Download, FileScan, Filter, ImagePlus, Loader2, Menu, RefreshCw, Search, X } from 'lucide-react'
 import { DailyCalendar } from '../components/DailyCalendar'
 import { DailySummary } from '../components/DailySummary'
@@ -55,6 +55,7 @@ export function AnalyticsDashboard({
   const [searchQuery, setSearchQuery] = useState('')
   const [isPeriodOpen, setIsPeriodOpen] = useState(false)
   const [isCustomiseOpen, setIsCustomiseOpen] = useState(false)
+  const loadSeqRef = useRef(0)
 
   const monthOptions = useMemo(() => {
     const currentKey = getCurrentMonthKey()
@@ -226,11 +227,14 @@ export function AnalyticsDashboard({
   }
 
   const loadData = async (pType = periodType, wOffset = weekOffset, sMonth = selectedMonth) => {
+    const seq = ++loadSeqRef.current
+
     if (isDemo) {
       setLoading(true)
       setError('')
       setIsWakingUp(false)
       const demoData = getDemoDashboardData(wOffset)
+      if (seq !== loadSeqRef.current) return
       setData(demoData)
       if (demoData?.unreadNotificationsCount != null) {
         setUnreadCount(demoData.unreadNotificationsCount)
@@ -256,11 +260,15 @@ export function AnalyticsDashboard({
     try {
       const [dashData, restData] = await Promise.all([
         fetchJsonWithRetry(dashUrl, { headers }, 3, 2500, (attempt) => {
-          setIsWakingUp(true)
-          setWakingUpAttempt(attempt)
+          if (seq === loadSeqRef.current) {
+            setIsWakingUp(true)
+            setWakingUpAttempt(attempt)
+          }
         }),
         fetchJsonWithRetry('/api/restaurant', { headers }, 3, 2500).catch(() => null),
       ])
+
+      if (seq !== loadSeqRef.current) return
 
       setData(dashData)
       setError('')
@@ -277,11 +285,14 @@ export function AnalyticsDashboard({
         onRestaurantUpdated?.(restData)
       }
     } catch (err) {
+      if (seq !== loadSeqRef.current) return
       setIsWakingUp(false)
       console.warn('[AnalyticsDashboard] Dashboard load failed after retries:', err.message)
       setError(err.message || 'Could not connect to dashboard service.')
     } finally {
-      setLoading(false)
+      if (seq === loadSeqRef.current) {
+        setLoading(false)
+      }
     }
   }
 
@@ -294,7 +305,7 @@ export function AnalyticsDashboard({
   const restaurantName = currentRestaurant?.name || 'Your Restaurant'
   const ownerName = currentRestaurant?.owner_name || currentUser?.email?.split('@')?.[0] || 'Owner'
   const dashboardKpis = data?.kpis || []
-  const hasBills = (data?.recentBills && data.recentBills.length > 0) || !!savedBill || isDemo
+  const hasBills = (data?.recentBills && data.recentBills.length > 0) || isDemo
   const activeMilestone = data?.milestones?.activeMilestone && !dismissedMilestoneIds.has(data.milestones.activeMilestone.id)
     ? data.milestones.activeMilestone
     : null
@@ -615,6 +626,8 @@ export function AnalyticsDashboard({
                 popularCombos={data.popularCombos}
                 milestones={data.milestones}
                 recentBills={data.recentBills || []}
+                peakHoursByDay={data.peakHoursByDay}
+                selectedDate={selectedDate}
                 onNavigate={onNavigate}
               />
 

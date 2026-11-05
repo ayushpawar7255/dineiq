@@ -3,16 +3,17 @@ services:
     name: dineiq
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: node backend/server.js
+    buildCommand: npm install && npm --prefix backend install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
-      - key: GEMINI_API_KEY
-        sync: false
       - key: SUPABASE_URL
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true

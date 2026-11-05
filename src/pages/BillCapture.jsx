@@ -240,7 +240,7 @@ function FailedView({ onRetry, errorMessage }) {
   )
 }
 
-function ConfirmationView({ billData, items, onBack, onSave, isSaving }) {
+function ConfirmationView({ billData, items, onBack, onSave, isSaving, error }) {
   const restName = billData.merchant || 'your restaurant'
   const count = items.length
   return (
@@ -251,6 +251,11 @@ function ConfirmationView({ billData, items, onBack, onSave, isSaving }) {
         <p className="eyebrow">Almost there</p>
         <h2>Ready to add this bill?</h2>
         <p>We’ll include this {billData.total} bill in your weekly report for {restName}.</p>
+        {error && (
+          <div style={{ background: '#fef2f2', border: '1px solid #f87171', color: '#b91c1c', padding: '0.75rem 1rem', borderRadius: '8px', margin: '1rem 0', fontSize: '0.875rem', textAlign: 'left' }}>
+            <strong>Database Error:</strong> {error}
+          </div>
+        )}
         <div className="confirm-summary">
           <div><span>Bill total</span><strong>{billData.total}</strong></div>
           <div><span>Items</span><strong>{count} item{count === 1 ? '' : 's'}</strong></div>
@@ -267,7 +272,7 @@ function ConfirmationView({ billData, items, onBack, onSave, isSaving }) {
               </>
             ) : (
               <>
-                <Check size={16} />Save bill
+                <Check size={16} />{error ? 'Retry saving bill' : 'Save bill'}
               </>
             )}
           </button>
@@ -481,13 +486,15 @@ export function BillCapture({ onNavigate, onBillSaved, restaurant, user, onSignO
       }
       const result = await fetch('/api/bills', { method: 'POST', headers, body: JSON.stringify(payload) })
       const resData = await result.json().catch(() => ({}))
-      if (!result.ok) throw new Error(resData.error || 'Save failed')
-      onBillSaved?.(payload)
+      if (!result.ok || resData.persisted === false) {
+        throw new Error(resData.error || resData.details || 'Save failed: Database persistence error.')
+      }
+      onBillSaved?.(resData)
       setState('saved')
     } catch (error) {
       console.error('Bill save failed', error)
       setErrorMsg(error.message)
-      setState('failed')
+      setState('save_failed')
     } finally {
       setIsSaving(false)
     }
@@ -504,10 +511,35 @@ export function BillCapture({ onNavigate, onBillSaved, restaurant, user, onSignO
         onItemChange={handleItemChange}
         onAddItem={handleAddItem}
         onRemoveItem={handleRemoveItem}
-        onConfirm={() => setState('confirmation')}
+        onConfirm={() => {
+          setErrorMsg('')
+          setState('confirmation')
+        }}
       />
     ),
     failed: <FailedView errorMessage={errorMsg} onRetry={() => setState('capture')} />,
+    save_failed: (
+      <>
+        <Stepper current={3} />
+        <section className="capture-card failed-card">
+          <div className="failure-icon" style={{ background: '#fef2f2', color: '#ef4444' }}><X size={22} /></div>
+          <p className="eyebrow" style={{ color: '#ef4444' }}>Database Save Error</p>
+          <h2>Could not save this bill</h2>
+          <p style={{ maxWidth: 520, margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
+            {errorMsg || 'A database error occurred while trying to commit this bill to Supabase. Your bill details are intact.'}
+          </p>
+          <div className="confirmation-actions" style={{ justifyContent: 'center', gap: '1rem' }}>
+            <button type="button" className="secondary-button" onClick={() => setState('confirmation')} disabled={isSaving}>
+              <ArrowLeft size={15} />Review bill
+            </button>
+            <button type="button" className="primary-button" onClick={saveBill} disabled={isSaving}>
+              <RefreshCw size={16} className={isSaving ? 'spin' : ''} />
+              {isSaving ? 'Retrying...' : 'Retry Saving'}
+            </button>
+          </div>
+        </section>
+      </>
+    ),
     confirmation: (
       <ConfirmationView
         billData={billData}
@@ -515,6 +547,7 @@ export function BillCapture({ onNavigate, onBillSaved, restaurant, user, onSignO
         onBack={() => setState('extracted')}
         onSave={saveBill}
         isSaving={isSaving}
+        error={errorMsg}
       />
     ),
     saved: (

@@ -1,9 +1,10 @@
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import express from 'express'
 import multer from 'multer'
 import crypto from 'crypto'
 import fs from 'fs'
 import path from 'path'
+import dns from 'dns'
 import { fileURLToPath } from 'url'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import { createClient } from '@supabase/supabase-js'
@@ -11,6 +12,42 @@ import { extractStructuredPlan, queryRealData, generateGroundedAnswer } from './
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+dotenv.config()
+dotenv.config({ path: path.join(__dirname, '.env') })
+dotenv.config({ path: path.join(__dirname, '../.env') })
+
+// DNS fallback: if local ISP DNS fails for supabase.co, resolve via 8.8.8.8 / 1.1.1.1
+const originalLookup = dns.lookup
+dns.lookup = function (hostname, options, callback) {
+  if (typeof options === 'function') {
+    callback = options
+    options = {}
+  }
+  originalLookup(hostname, options, (err, address, family) => {
+    if (err && hostname && String(hostname).includes('supabase.co')) {
+      const resolver = new dns.promises.Resolver()
+      resolver.setServers(['8.8.8.8', '1.1.1.1'])
+      resolver.resolve4(hostname).then(
+        (addresses) => {
+          if (addresses && addresses.length > 0) {
+            if (options && options.all) {
+              callback(null, addresses.map((a) => ({ address: a, family: 4 })))
+            } else {
+              callback(null, addresses[0], 4)
+            }
+          } else {
+            callback(err, address, family)
+          }
+        },
+        () => callback(err, address, family)
+      )
+    } else {
+      callback(err, address, family)
+    }
+  })
+}
+
 const DATA_DIR = path.join(__dirname, 'data')
 const STORE_FILE = path.join(DATA_DIR, 'store.json')
 
@@ -22,6 +59,7 @@ try {
   if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
     supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
       auth: { persistSession: false, autoRefreshToken: false },
+      realtime: { transport: null },
     })
   }
 } catch (err) {
@@ -127,6 +165,46 @@ function getUser(email) {
   return null
 }
 
+const SESSION_SECRET = process.env.SESSION_SECRET || 'dineiq-session-token-secret-production-2026'
+
+function createSessionToken(user) {
+  const payload = Buffer.from(JSON.stringify({
+    id: user.id,
+    email: user.email,
+    exp: Date.now() + 30 * 24 * 60 * 60 * 1000,
+  })).toString('base64url')
+  const signature = crypto.createHmac('sha256', SESSION_SECRET).update(payload).digest('base64url')
+  return `dqt.${payload}.${signature}`
+}
+
+function verifySessionToken(token) {
+  if (!token || typeof token !== 'string') return null
+  if (token.startsWith('dqt.')) {
+    const parts = token.split('.')
+    if (parts.length === 3) {
+      const [prefix, payloadB64, signature] = parts
+      try {
+        const expectedSig = crypto.createHmac('sha256', SESSION_SECRET).update(payloadB64).digest('base64url')
+        if (crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSig))) {
+          const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'))
+          if (payload.exp && payload.exp > Date.now()) {
+            return {
+              token,
+              user: { id: payload.id, email: payload.email },
+              expiresAt: payload.exp,
+            }
+          }
+        }
+      } catch {}
+    }
+  }
+  const session = authSessions.get(token)
+  if (session && session.expiresAt > Date.now()) {
+    return session
+  }
+  return null
+}
+
 function extractToken(req) {
   const auth = req.headers?.authorization
   if (auth && auth.startsWith('Bearer ')) {
@@ -138,14 +216,7 @@ function extractToken(req) {
 function getAuthSession(req) {
   const token = extractToken(req)
   if (!token) return null
-  const session = authSessions.get(token)
-  if (!session) return null
-  if (session.expiresAt < Date.now()) {
-    authSessions.delete(token)
-    saveStore()
-    return null
-  }
-  return session
+  return verifySessionToken(token)
 }
 
 function getRestaurantForUser(userId, userEmail) {
@@ -194,11 +265,25 @@ function getRestaurantForUser(userId, userEmail) {
       }
     }
   } catch {}
+
+  // Link to existing restaurant in store (e.g. Taste of Mumbai) rather than creating a blank one
+  if (userRestaurants.size > 0) {
+    const existing = userRestaurants.values().next().value
+    if (existing) {
+      if (userId && !existing.user_id) {
+        existing.user_id = userId
+        userRestaurants.set(userId, existing)
+        saveStore()
+      }
+      return existing
+    }
+  }
+
   const newRest = {
     ...EMPTY_RESTAURANT,
     id: `rest_${userId || Date.now()}`,
     user_id: userId || null,
-    name: '',
+    name: 'Taste of Mumbai',
     owner_name: userEmail?.split('@')?.[0] || 'Owner',
     email: userEmail || '',
   }
@@ -258,55 +343,56 @@ Rules:
 - Distinguish subtotal from grand total. The grand total is usually labelled total, net payable, or amount due.
 - A line item amount is the final amount for that line, while rate is its per-unit price.`
 
-let supabaseReachable = true
-let lastSupabaseFailure = 0
-const SUPABASE_COOLDOWN_MS = 60 * 1000
-
 function isSupabaseAvailable() {
-  if (!supabase) return false
-  if (!supabaseReachable) {
-    if (Date.now() - lastSupabaseFailure > SUPABASE_COOLDOWN_MS) {
-      return true
-    }
-    return false
-  }
-  return true
+  return Boolean(supabase)
 }
 
-function markSupabaseFailure(err) {
-  supabaseReachable = false
-  lastSupabaseFailure = Date.now()
-  console.warn('[supabase] connectivity issue, temporarily pausing supabase calls for 60s:', err?.message || err)
+async function withTimeout(promise, ms = 10000) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Supabase request timed out')), ms)),
+  ])
 }
 
-async function withTimeout(promise, ms = 2000) {
-  try {
-    const res = await Promise.race([
-      promise,
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Supabase request timed out')), ms)),
-    ])
-    if (res && res.error) {
-      markSupabaseFailure(res.error)
-    }
-    return res
-  } catch (err) {
-    markSupabaseFailure(err)
-    throw err
-  }
-}
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 function isValidUUID(val) {
   return typeof val === 'string' && UUID_REGEX.test(val)
 }
 
-async function getRestaurantId() {
-  if (configuredRestaurantId) return configuredRestaurantId
-  if (!isSupabaseAvailable()) return EMPTY_RESTAURANT.id
-  const { data, error } = await withTimeout(supabase.from('restaurants').select('id').limit(1).single())
-  if (error) throw error
-  return data.id
+function getRestaurantUUID(restaurantOrId) {
+  const rawId = typeof restaurantOrId === 'string' ? restaurantOrId : (restaurantOrId?.id || '')
+  if (isValidUUID(rawId)) return rawId
+  const hash = crypto.createHash('md5').update(String(rawId || 'default-restaurant')).digest('hex')
+  return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-4${hash.slice(13, 16)}-a${hash.slice(17, 20)}-${hash.slice(20, 32)}`
 }
+
+async function ensureRestaurantInSupabase(restUUID, restaurant) {
+  if (!supabase) return false
+  try {
+    const { data, error } = await withTimeout(
+      supabase.from('restaurants').select('id').eq('id', restUUID).maybeSingle()
+    )
+    if (!error && data) return true
+
+    const payload = {
+      id: restUUID,
+      name: restaurant?.name || 'Taste of Mumbai',
+      email: restaurant?.email || null,
+      currency: restaurant?.currency || 'INR',
+    }
+    const { error: upsertError } = await withTimeout(supabase.from('restaurants').upsert(payload))
+    if (upsertError) {
+      console.warn('[supabase] ensureRestaurantInSupabase upsert error:', upsertError.message)
+      return false
+    }
+    return true
+  } catch (err) {
+    console.warn('[supabase] ensureRestaurantInSupabase exception:', err.message)
+    return false
+  }
+}
+
 
 function numberValue(value) {
   const number = Number(String(value ?? '').replace(/[^0-9.-]/g, ''))
@@ -1232,11 +1318,12 @@ async function checkAndTriggerNotifications(bills = [], restaurant = EMPTY_RESTA
     }
     await deliverNotification(newNotif, restaurant)
 
-    if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+    const restUUID = getRestaurantUUID(restaurantId)
+    if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
       try {
         await withTimeout(
           supabase.from('notifications').insert({
-            restaurant_id: restaurantId,
+            restaurant_id: restUUID,
             trigger_type,
             dedup_key,
             title,
@@ -1581,13 +1668,16 @@ function computeDashboard(bills, restaurant = EMPTY_RESTAURANT, options = {}) {
 
   // 5. RECENT BILLS
   const recentSourceBills = periodBills.length > 0 ? periodBills : allBills
-  const recentBills = recentSourceBills.slice(0, 8).map((bill) => ({
+  const recentBills = recentSourceBills.slice(0, 25).map((bill) => ({
+    id: bill.id,
     number: `#${bill.bill_number || String(bill.id || '').slice(0, 8)}`,
     time: String(bill.time || '-').slice(0, 5),
     date: normalizeDateToYMD(bill.date) || bill.date || '-',
     items: bill.bill_items?.length || 0,
     total: `₹${numberValue(bill.total).toLocaleString('en-IN')}`,
   }))
+
+  const peakHoursByDay = computePeakHoursByDay(allBills, periodBills, todayStr)
 
   return {
     kpis: [
@@ -1610,6 +1700,7 @@ function computeDashboard(bills, restaurant = EMPTY_RESTAURANT, options = {}) {
     notifications: userNotifications.get(restaurant.id) || [],
     unreadNotificationsCount: (userNotifications.get(restaurant.id) || []).filter((n) => !n.is_read).length,
     recentBills,
+    peakHoursByDay,
     todaySummary,
     todayDateLabel,
     todayStatus,
@@ -1618,9 +1709,114 @@ function computeDashboard(bills, restaurant = EMPTY_RESTAURANT, options = {}) {
   }
 }
 
+function computePeakHoursByDay(allBills = [], periodBills = [], todayStr = '') {
+  const HOURS = ['12p', '1p', '2p', '6p', '7p', '8p', '9p', '10p']
+  const DAYS = ['Today', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+  function getHourSlot(timeStr) {
+    if (!timeStr) return null
+    const s = String(timeStr).trim()
+    const ampmMatch = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(am|pm)$/i)
+    let h
+    if (ampmMatch) {
+      h = parseInt(ampmMatch[1], 10)
+      const isPm = ampmMatch[3].toLowerCase() === 'pm'
+      if (isPm && h < 12) h += 12
+      if (!isPm && h === 12) h = 0
+    } else {
+      const match24 = s.match(/^(\d{1,2}):(\d{2})/)
+      if (!match24) return null
+      h = parseInt(match24[1], 10)
+    }
+    if (h <= 12) return '12p'
+    if (h === 13) return '1p'
+    if (h === 14 || h === 15) return '2p'
+    if (h >= 16 && h <= 18) return '6p'
+    if (h === 19) return '7p'
+    if (h === 20) return '8p'
+    if (h === 21) return '9p'
+    if (h >= 22) return '10p'
+    return null
+  }
+
+  const sourceBills = periodBills && periodBills.length > 0 ? periodBills : allBills
+
+  const result = {}
+  DAYS.forEach((day) => {
+    let dayBills = []
+    if (day === 'Today') {
+      dayBills = allBills.filter((b) => {
+        const d = normalizeDateToYMD(b.date) || normalizeDateToYMD(b.created_at)
+        return d === todayStr
+      })
+    } else {
+      dayBills = sourceBills.filter((b) => {
+        const dStr = normalizeDateToYMD(b.date) || normalizeDateToYMD(b.created_at)
+        if (!dStr) return false
+        const [y, m, d] = dStr.split('-').map(Number)
+        const dateObj = new Date(y, m - 1, d)
+        const weekday = dateObj.toLocaleDateString('en-US', { weekday: 'long' })
+        return weekday.toLowerCase() === day.toLowerCase()
+      })
+      if (dayBills.length === 0 && allBills.length > 0) {
+        dayBills = allBills.filter((b) => {
+          const dStr = normalizeDateToYMD(b.date) || normalizeDateToYMD(b.created_at)
+          if (!dStr) return false
+          const [y, m, d] = dStr.split('-').map(Number)
+          const dateObj = new Date(y, m - 1, d)
+          const weekday = dateObj.toLocaleDateString('en-US', { weekday: 'long' })
+          return weekday.toLowerCase() === day.toLowerCase()
+        })
+      }
+    }
+
+    const counts = {}
+    HOURS.forEach((h) => { counts[h] = 0 })
+    dayBills.forEach((b) => {
+      const slot = getHourSlot(b.time)
+      if (slot && counts[slot] !== undefined) {
+        counts[slot] += 1
+      }
+    })
+
+    const hoursArray = HOURS.map((hour) => ({ hour, orders: counts[hour] }))
+    let busiestHour = null
+    let maxOrders = 0
+    hoursArray.forEach((item) => {
+      if (item.orders > maxOrders) {
+        maxOrders = item.orders
+        busiestHour = item.hour
+      }
+    })
+
+    const slotWindowMap = {
+      '12p': '12:00 PM – 1:30 PM',
+      '1p': '1:00 PM – 2:30 PM',
+      '2p': '2:00 PM – 3:30 PM',
+      '6p': '6:00 PM – 7:30 PM',
+      '7p': '7:00 PM – 8:30 PM',
+      '8p': '8:00 PM – 9:30 PM',
+      '9p': '9:00 PM – 10:30 PM',
+      '10p': '10:00 PM – 11:30 PM',
+    }
+
+    const busiestWindow = maxOrders > 0 && busiestHour
+      ? slotWindowMap[busiestHour] || `${busiestHour} window`
+      : 'No service recorded'
+
+    result[day] = {
+      hours: hoursArray,
+      busiestWindow,
+      totalOrders: dayBills.length,
+    }
+  })
+
+  return result
+}
+
 const coldStartSimMap = new Map()
 
-app.get('/api/health', (req, res) => {
+app.get(['/health', '/api/health'], (req, res) => {
   res.json({
     ok: true,
     status: 'healthy',
@@ -1630,6 +1826,13 @@ app.get('/api/health', (req, res) => {
 })
 
 app.get('/api/dashboard', async (request, response) => {
+  response.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0',
+    'Surrogate-Control': 'no-store',
+  })
+
   // Support testing simulated cold start 503 errors
   if (request.headers['x-simulate-cold-start']) {
     const simKey = request.headers['x-test-id'] || 'default'
@@ -1655,22 +1858,28 @@ app.get('/api/dashboard', async (request, response) => {
   const month = request.query.month || ''
 
   let bills = []
-  if (restaurantId && userBills.has(restaurantId)) {
-    bills = [...userBills.get(restaurantId)]
-  }
-
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurantId || restaurant)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
-        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false }).order('time', { ascending: false })
+        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restUUID).order('date', { ascending: false }).order('time', { ascending: false })
       )
-      if (!error && data) {
-        const existingIds = new Set(data.map((b) => b.id || b.bill_number))
-        bills = [...data, ...bills.filter((b) => !existingIds.has(b.id || b.bill_number))]
+      if (!error && Array.isArray(data)) {
+        bills = data
+        if (restaurantId) {
+          userBills.set(restaurantId, [...data])
+        }
+      } else if (restaurantId && userBills.has(restaurantId)) {
+        bills = [...userBills.get(restaurantId)]
       }
     } catch (error) {
-      console.warn('[dashboard] supabase fetch failed for restaurantId:', restaurantId, error.message)
+      console.warn('[dashboard] supabase fetch failed for restUUID:', restUUID, error.message)
+      if (restaurantId && userBills.has(restaurantId)) {
+        bills = [...userBills.get(restaurantId)]
+      }
     }
+  } else if (restaurantId && userBills.has(restaurantId)) {
+    bills = [...userBills.get(restaurantId)]
   }
 
   try {
@@ -2050,17 +2259,17 @@ app.get('/api/reports/monthly', async (request, response) => {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurantId || restaurant)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
-        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
+        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restUUID).order('date', { ascending: false })
       )
-      if (!error && data) {
-        const existingIds = new Set(data.map((b) => b.id || b.bill_number))
-        allBills = [...data, ...allBills.filter((b) => !existingIds.has(b.id || b.bill_number))]
+      if (!error && Array.isArray(data)) {
+        allBills = data
       }
     } catch (err) {
-      console.warn('[reports/monthly] supabase fetch failed for restaurantId:', restaurantId, err.message)
+      console.warn('[reports/monthly] supabase fetch failed for restUUID:', restUUID, err.message)
     }
   }
 
@@ -2176,17 +2385,17 @@ app.get('/api/reports/gst-summary', async (request, response) => {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurantId || restaurant)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
-        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
+        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restUUID).order('date', { ascending: false })
       )
-      if (!error && data) {
-        const existingIds = new Set(data.map((b) => b.id || b.bill_number))
-        allBills = [...data, ...allBills.filter((b) => !existingIds.has(b.id || b.bill_number))]
+      if (!error && Array.isArray(data)) {
+        allBills = data
       }
     } catch (err) {
-      console.warn('[reports/gst-summary] supabase fetch failed for restaurantId:', restaurantId, err.message)
+      console.warn('[reports/gst-summary] supabase fetch failed for restUUID:', restUUID, err.message)
     }
   }
 
@@ -2360,16 +2569,25 @@ app.post('/api/bills', express.json(), async (request, response) => {
     bill_items: billItems,
   }
 
-  if (!userBills.has(restaurantId)) {
-    userBills.set(restaurantId, [])
-  }
-  userBills.get(restaurantId).unshift(newBillRecord)
-  saveStore()
+  const isSupaConfigured = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
+  const restUUID = getRestaurantUUID(restaurantId || restaurant)
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupaConfigured) {
+    if (!isSupabaseAvailable()) {
+      return response.status(503).json({
+        error: 'Database connection unavailable. Your database project may be paused or unreachable. Bill was NOT saved.',
+        code: 'DB_UNAVAILABLE',
+        persisted: false,
+      })
+    }
     try {
+      const restReady = await ensureRestaurantInSupabase(restUUID, restaurant)
+      if (!restReady) {
+        throw new Error('Database unreachable or failed to initialize restaurant profile in Supabase.')
+      }
+
       const { data: saved, error } = await withTimeout(supabase.from('bills').insert({
-        restaurant_id: restaurantId,
+        restaurant_id: restUUID,
         bill_number: newBillRecord.bill_number,
         date: newBillRecord.date,
         time: newBillRecord.time,
@@ -2379,22 +2597,55 @@ app.post('/api/bills', express.json(), async (request, response) => {
         total: newBillRecord.total,
         payment_mode: newBillRecord.payment_mode,
       }).select().single())
-      if (!error && saved) {
-        await withTimeout(supabase.from('bill_items').insert(billItems.map((item) => ({
+
+      if (error || !saved) {
+        throw new Error(error?.message || 'Database rejected bill record insertion.')
+      }
+
+      if (billItems.length > 0) {
+        const { error: itemsError } = await withTimeout(supabase.from('bill_items').insert(billItems.map((item) => ({
           bill_id: saved.id,
           item_name: item.item_name,
           quantity: item.quantity,
           rate: item.rate,
           amount: item.amount,
         }))))
-        return response.status(201).json({ ...saved, items: bill.items || [] })
+        if (itemsError) {
+          console.warn('[bills] bill items insert error:', itemsError.message)
+        }
       }
+
+      // Confirmed saved in Supabase! Now update local memory store
+      if (!userBills.has(restaurantId)) {
+        userBills.set(restaurantId, [])
+      }
+      userBills.get(restaurantId).unshift({ ...newBillRecord, id: saved.id, restaurant_id: restUUID })
+      saveStore()
+
+      return response.status(201).json({
+        ...saved,
+        items: bill.items || [],
+        persisted: true,
+        storage: 'supabase',
+      })
     } catch (error) {
-      console.warn('[bills] supabase insert failed, saved to local user store:', error.message)
+      console.error('[bills] Supabase persistence failed:', error.message)
+      return response.status(503).json({
+        error: `Database persistence failed: ${error.message}. Bill was NOT saved to the database.`,
+        code: 'DB_PERSISTENCE_FAILED',
+        persisted: false,
+        details: error.message,
+      })
     }
   }
 
-  return response.status(201).json({ ...newBillRecord, items: bill.items || [] })
+  // Supabase not configured in env (e.g. offline testing)
+  if (!userBills.has(restaurantId)) {
+    userBills.set(restaurantId, [])
+  }
+  userBills.get(restaurantId).unshift(newBillRecord)
+  saveStore()
+  return response.status(201).json({ ...newBillRecord, items: bill.items || [], persisted: true, storage: 'local' })
 })
 
 const SUPABASE_RESTAURANT_COLUMNS = new Set([
@@ -2412,11 +2663,6 @@ const SUPABASE_RESTAURANT_COLUMNS = new Set([
   'fixed_expenses',
   'staff_expenses',
   'variable_expenses',
-  'acknowledged_milestones',
-  'fssai_license_number',
-  'fssai_expiry_date',
-  'other_licenses',
-  'last_notified',
 ])
 
 app.post('/api/auth/signup', express.json(), async (request, response) => {
@@ -2469,7 +2715,7 @@ app.post('/api/auth/signup', express.json(), async (request, response) => {
   }
   userRestaurants.set(userId, restaurant)
 
-  const token = `dqt_${crypto.randomBytes(24).toString('hex')}`
+  const token = createSessionToken(user)
   const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000 // 30 days
   authSessions.set(token, { token, user: { id: user.id, email: user.email }, expiresAt })
   saveStore()
@@ -2501,7 +2747,7 @@ app.post('/api/auth/signin', express.json(), async (request, response) => {
         const userId = data.user.id
         const user = { id: userId, email: cleanEmail }
         const restaurant = getRestaurantForUser(userId, cleanEmail)
-        const token = data.session?.access_token || `dqt_${crypto.randomBytes(24).toString('hex')}`
+        const token = createSessionToken(user)
         authSessions.set(token, { token, user, expiresAt: Date.now() + 30 * 24 * 60 * 60 * 1000 })
         saveStore()
         return response.json({ token, user, restaurant })
@@ -2516,7 +2762,7 @@ app.post('/api/auth/signin', express.json(), async (request, response) => {
     return response.status(401).json({ error: 'Invalid email or password. Please check your credentials.' })
   }
 
-  const token = `dqt_${crypto.randomBytes(24).toString('hex')}`
+  const token = createSessionToken(user)
   const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000
   authSessions.set(token, { token, user: { id: user.id, email: user.email }, expiresAt })
 
@@ -2673,7 +2919,7 @@ app.post('/api/auth/update-password', express.json(), async (request, response) 
   // Re-link to existing restaurant (e.g. Mr. Sandwhich) without ever creating a blank one!
   const restaurant = getRestaurantForUser(user.id, cleanEmail)
 
-  const authToken = `dqt_${crypto.randomBytes(24).toString('hex')}`
+  const authToken = createSessionToken(user)
   const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000
   authSessions.set(authToken, { token: authToken, user: { id: user.id, email: user.email }, expiresAt })
   saveStore()
@@ -2728,47 +2974,74 @@ app.post('/api/auth/signout', async (request, response) => {
 app.get('/api/restaurant', async (request, response) => {
   const auth = getAuthUserRestaurant(request)
   if (auth?.restaurant) {
+    if (isSupabaseAvailable()) {
+      try {
+        const restUUID = getRestaurantUUID(auth.restaurant.id || auth.restaurant)
+        if (restUUID && isValidUUID(restUUID)) {
+          const { data, error } = await withTimeout(
+            supabase.from('restaurants').select('*').eq('id', restUUID).maybeSingle()
+          )
+          if (!error && data) {
+            if (Array.isArray(data.fixed_expenses)) auth.restaurant.fixed_expenses = data.fixed_expenses
+            if (Array.isArray(data.staff_expenses)) auth.restaurant.staff_expenses = data.staff_expenses
+            if (Array.isArray(data.variable_expenses)) auth.restaurant.variable_expenses = data.variable_expenses
+            if (data.weekly_target != null) auth.restaurant.weekly_target = data.weekly_target
+            if (data.default_tax_rate != null) auth.restaurant.default_tax_rate = data.default_tax_rate
+            if (data.currency) auth.restaurant.currency = data.currency
+            saveStore()
+          }
+        }
+      } catch (err) {
+        console.warn('[restaurant] failed to sync from supabase:', err.message)
+      }
+    }
     return response.json(auth.restaurant)
   }
-
-  if (isSupabaseAvailable()) {
-    try {
-      const id = await getRestaurantId()
-      const { data, error } = await withTimeout(supabase.from('restaurants').select('*').eq('id', id).single())
-      if (!error && data) {
-        Object.assign(EMPTY_RESTAURANT, data)
-        return response.json(EMPTY_RESTAURANT)
-      }
-    } catch (error) {
-      console.warn('[restaurant] supabase fetch failed, using fallback:', error.message)
-    }
-  }
-  return response.json(EMPTY_RESTAURANT)
+  return response.json({ ...EMPTY_RESTAURANT })
 })
 
 app.patch('/api/restaurant', express.json(), async (request, response) => {
   const auth = getAuthUserRestaurant(request)
-  let targetRestaurant = auth?.restaurant || EMPTY_RESTAURANT
+  const targetRestaurant = auth?.restaurant
+  if (!targetRestaurant) {
+    return response.status(401).json({ error: 'Unauthorized: Restaurant session not found' })
+  }
 
-  Object.assign(targetRestaurant, request.body)
+  // Update targetRestaurant with request.body, but never allow altering identity fields (id, user_id)
+  const protectedFields = new Set(['id', 'user_id'])
+  for (const [key, val] of Object.entries(request.body || {})) {
+    if (!protectedFields.has(key)) {
+      targetRestaurant[key] = val
+    }
+  }
   saveStore()
 
   if (isSupabaseAvailable()) {
     try {
-      const id = await getRestaurantId()
-      const supabasePayload = {}
-      for (const [key, val] of Object.entries(request.body || {})) {
-        if (SUPABASE_RESTAURANT_COLUMNS.has(key)) {
-          supabasePayload[key] = val
+      const restUUID = getRestaurantUUID(targetRestaurant.id || targetRestaurant)
+      if (restUUID && isValidUUID(restUUID)) {
+        await ensureRestaurantInSupabase(restUUID, targetRestaurant)
+        const supabasePayload = {}
+        for (const [key, val] of Object.entries(request.body || {})) {
+          if (SUPABASE_RESTAURANT_COLUMNS.has(key)) {
+            supabasePayload[key] = val
+          }
         }
-      }
-      if (Object.keys(supabasePayload).length > 0) {
-        const { data, error } = await withTimeout(
-          supabase.from('restaurants').update(supabasePayload).eq('id', id).select().single()
-        )
-        if (!error && data) {
-          Object.assign(targetRestaurant, data)
-          saveStore()
+        if (Object.keys(supabasePayload).length > 0) {
+          const { data, error } = await withTimeout(
+            supabase.from('restaurants').update(supabasePayload).eq('id', restUUID).select().single()
+          )
+          if (!error && data) {
+            // Update only columns that belong to supabasePayload; NEVER overwrite id, name, user_id from Supabase
+            for (const key of Object.keys(supabasePayload)) {
+              if (data[key] !== undefined) {
+                targetRestaurant[key] = data[key]
+              }
+            }
+            saveStore()
+          } else if (error) {
+            console.warn('[restaurant] supabase update error for restUUID:', restUUID, error.message)
+          }
         }
       }
     } catch (error) {
@@ -2796,13 +3069,14 @@ app.post('/api/milestones/acknowledge', express.json(), async (request, response
     saveStore()
   }
 
-  if (isSupabaseAvailable() && isValidUUID(restaurant.id) && restaurant.id !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurant.id || restaurant)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       await withTimeout(
         supabase
           .from('restaurants')
           .update({ acknowledged_milestones: restaurant.acknowledged_milestones })
-          .eq('id', restaurant.id)
+          .eq('id', restUUID)
       )
     } catch (error) {
       console.warn('[milestones/acknowledge] supabase update failed, saved to local store:', error.message)
@@ -2855,10 +3129,11 @@ app.post('/api/notifications/read', express.json(), async (request, response) =>
   }
   saveStore()
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurantId)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
-        await withTimeout(supabase.from('notifications').update({ is_read: true }).eq('restaurant_id', restaurantId))
+        await withTimeout(supabase.from('notifications').update({ is_read: true }).eq('restaurant_id', restUUID))
       } else if (notificationId) {
         await withTimeout(supabase.from('notifications').update({ is_read: true }).eq('id', notificationId))
       }
@@ -2887,10 +3162,10 @@ app.post('/api/notifications/clear', express.json(), async (request, response) =
   }
   saveStore()
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       if (all) {
-        await withTimeout(supabase.from('notifications').delete().eq('restaurant_id', restaurantId))
+        await withTimeout(supabase.from('notifications').delete().eq('restaurant_id', restUUID))
       } else if (notificationId) {
         await withTimeout(supabase.from('notifications').delete().eq('id', notificationId))
       }
@@ -2955,17 +3230,17 @@ async function getRestaurantBillsWithItems(restaurantId) {
     } catch {}
   }
 
-  if (isSupabaseAvailable() && isValidUUID(restaurantId) && restaurantId !== EMPTY_RESTAURANT.id) {
+  const restUUID = getRestaurantUUID(restaurantId)
+  if (isSupabaseAvailable() && restUUID && restUUID !== EMPTY_RESTAURANT.id) {
     try {
       const { data, error } = await withTimeout(
-        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restaurantId).order('date', { ascending: false })
+        supabase.from('bills').select('*, bill_items(*)').eq('restaurant_id', restUUID).order('date', { ascending: false })
       )
-      if (!error && data) {
-        const existingIds = new Set(data.map((b) => b.id || b.bill_number))
-        allBills = [...data, ...allBills.filter((b) => !existingIds.has(b.id || b.bill_number))]
+      if (!error && Array.isArray(data)) {
+        allBills = data
       }
     } catch (err) {
-      console.warn('[bills] supabase fetch failed for restaurantId:', restaurantId, err.message)
+      console.warn('[bills] supabase fetch failed for restUUID:', restUUID, err.message)
     }
   }
   return allBills
@@ -3026,5 +3301,25 @@ app.use((error, _request, response, _next) => {
   console.error('[extract-bill] upload middleware failed:', error.message)
   return response.status(400).json({ error: 'The bill upload could not be read.' })
 })
+
+// Supabase Keep-Alive: Ping database every 24 hours to prevent free-tier 7-day auto-pause
+function scheduleSupabaseKeepAlive() {
+  const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000
+  async function ping() {
+    if (supabase && isSupabaseAvailable()) {
+      try {
+        const { error } = await supabase.from('restaurants').select('id').limit(1)
+        if (!error) {
+          console.log('[supabase] keep-alive ping succeeded, inactivity timer reset')
+        }
+      } catch (err) {
+        console.warn('[supabase] keep-alive ping warning:', err.message)
+      }
+    }
+  }
+  setTimeout(ping, 10000)
+  setInterval(ping, TWENTY_FOUR_HOURS)
+}
+scheduleSupabaseKeepAlive()
 
 app.listen(port, () => console.log(`DineIQ extraction API listening on http://localhost:${port}`))

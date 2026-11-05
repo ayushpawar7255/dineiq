@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowUpRight, Clock3, Sparkles, Trophy, UtensilsCrossed, Zap } from 'lucide-react'
-import { getFormattedToday, getTodayWeekday, peakHours } from '../mock-data/dashboard'
+import { getFormattedToday, getTodayWeekday } from '../mock-data/dashboard'
 import { PerformanceTable } from './PerformanceTable'
 
 function billItemsCount(bill) {
@@ -23,28 +23,75 @@ export function DashboardExtras({
   recentBills = [],
   popularCombos = null,
   milestones = null,
+  peakHoursByDay = null,
+  selectedDate = null,
   onNavigate,
 }) {
   const [selectedDay, setSelectedDay] = useState('Today')
   const [isDayDropdownOpen, setIsDayDropdownOpen] = useState(false)
 
-  const bills = savedBill
-    ? [savedBill, ...(recentBills || []).filter((bill) => bill.number !== savedBill.number)]
-    : recentBills || []
+  const bills = recentBills || []
 
-  // Dynamic peak hours based on selected day
-  const isWeekend = selectedDay === 'Saturday' || selectedDay === 'Sunday'
-  const currentPeakHours = peakHours.map((item) => {
-    if (isWeekend) {
-      if (item.hour === '8 PM' || item.hour === '9 PM' || item.hour === '10 PM') {
-        return { ...item, orders: Math.round(item.orders * 1.45) }
+  useEffect(() => {
+    if (selectedDate) {
+      const [y, m, d] = String(selectedDate).split('-').map(Number)
+      if (y && m && d) {
+        const dateObj = new Date(y, m - 1, d)
+        const weekday = dateObj.toLocaleDateString('en-US', { weekday: 'long' })
+        setSelectedDay(weekday)
       }
-      return { ...item, orders: Math.max(1, Math.round(item.orders * 0.9)) }
+    } else {
+      setSelectedDay('Today')
     }
-    return item
-  })
+  }, [selectedDate])
+
+  // Dynamic peak hours based on selected day and real bills data
+  const dayData = peakHoursByDay?.[selectedDay]
+
+  const currentPeakHours = useMemo(() => {
+    if (dayData?.hours && Array.isArray(dayData.hours)) {
+      return dayData.hours
+    }
+    // Fallback: calculate from recentBills if available
+    const HOURS = ['12p', '1p', '2p', '6p', '7p', '8p', '9p', '10p']
+    const counts = {}
+    HOURS.forEach((h) => { counts[h] = 0 })
+    bills.forEach((b) => {
+      const t = String(b.time || '').trim()
+      const m = t.match(/^(\d{1,2})/)
+      if (m) {
+        const h = parseInt(m[1], 10)
+        let slot = null
+        if (h <= 12) slot = '12p'
+        else if (h === 13) slot = '1p'
+        else if (h === 14 || h === 15) slot = '2p'
+        else if (h >= 16 && h <= 18) slot = '6p'
+        else if (h === 19) slot = '7p'
+        else if (h === 20) slot = '8p'
+        else if (h === 21) slot = '9p'
+        else if (h >= 22) slot = '10p'
+        if (slot && counts[slot] !== undefined) counts[slot]++
+      }
+    })
+    return HOURS.map((hour) => ({ hour, orders: counts[hour] }))
+  }, [dayData, bills])
 
   const max = Math.max(1, ...currentPeakHours.map((item) => item.orders))
+  const busiestWindow = dayData?.busiestWindow || (() => {
+    const top = [...currentPeakHours].sort((a, b) => b.orders - a.orders)[0]
+    if (!top || top.orders === 0) return 'No service recorded'
+    const map = {
+      '12p': '12:00 PM – 1:30 PM',
+      '1p': '1:00 PM – 2:30 PM',
+      '2p': '2:00 PM – 3:30 PM',
+      '6p': '6:00 PM – 7:30 PM',
+      '7p': '7:00 PM – 8:30 PM',
+      '8p': '8:00 PM – 9:30 PM',
+      '9p': '9:00 PM – 10:30 PM',
+      '10p': '10:00 PM – 11:30 PM',
+    }
+    return map[top.hour] || `${top.hour} window`
+  })()
   const items = topItems || []
 
   // Top combo insight
@@ -241,7 +288,7 @@ export function DashboardExtras({
             <Clock3 size={14} />
             <span>
               Your busiest service window on {selectedDay === 'Today' ? getTodayWeekday() : selectedDay} is{' '}
-              <strong>{isWeekend ? '8:00 PM – 10:30 PM' : '7:00 PM – 9:00 PM'}</strong>
+              <strong>{busiestWindow}</strong>
             </span>
           </div>
         </section>
@@ -274,8 +321,8 @@ export function DashboardExtras({
               </thead>
               <tbody>
                 {bills.length > 0 ? (
-                  bills.map((bill) => (
-                    <tr key={bill.number}>
+                  bills.map((bill, index) => (
+                    <tr key={bill.id || `${bill.number || 'bill'}-${bill.date}-${bill.time}-${index}`}>
                       <td><strong>{bill.number}</strong></td>
                       <td>{bill.time}</td>
                       <td>{bill.date}</td>

@@ -611,6 +611,69 @@
   "bills": {
     "rest_usr_1790438016491_ngvkt7": [
       {
+        "id": "bill-1791038094955",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "VERIFY-LOCAL-TO-SUPABASE-1791038094823",
+        "date": "2026-10-03",
+        "time": "20:05",
+        "table_no": null,
+        "subtotal": 1476.19,
+        "gst": 73.81,
+        "total": 1550,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1791038094954-0",
+            "item_name": "Kadhai Paneer",
+            "quantity": 2,
+            "rate": 380,
+            "amount": 760
+          },
+          {
+            "id": "bi-1791038094954-1",
+            "item_name": "Tandoori Roti",
+            "quantity": 6,
+            "rate": 30,
+            "amount": 180
+          },
+          {
+            "id": "bi-1791038094954-2",
+            "item_name": "Jeera Rice",
+            "quantity": 2,
+            "rate": 180,
+            "amount": 360
+          }
+        ]
+      },
+      {
+        "id": "bill-1791036919411",
+        "restaurant_id": "rest_usr_1790438016491_ngvkt7",
+        "bill_number": "TEST-1791036918934",
+        "date": "2026-10-03",
+        "time": "19:40",
+        "table_no": null,
+        "subtotal": 1190.48,
+        "gst": 59.52,
+        "total": 1250,
+        "payment_mode": "UPI",
+        "bill_items": [
+          {
+            "id": "bi-1791036919411-0",
+            "item_name": "Paneer Butter Masala",
+            "quantity": 2,
+            "rate": 350,
+            "amount": 700
+          },
+          {
+            "id": "bi-1791036919411-1",
+            "item_name": "Butter Naan",
+            "quantity": 4,
+            "rate": 60,
+            "amount": 240
+          }
+        ]
+      },
+      {
         "id": "bill-1790844646403",
         "restaurant_id": "rest_usr_1790438016491_ngvkt7",
         "bill_number": "BULK-35-6119",
