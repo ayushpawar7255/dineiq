@@ -3,7 +3,7 @@ services:
     name: dineiq
     runtime: node
     plan: free
-    buildCommand: npm install && npm --prefix backend install && npm run build
+    buildCommand: npm install --include=dev && npm --prefix backend install && npm run build
     startCommand: npm start
     healthCheckPath: /health
     envVars:
